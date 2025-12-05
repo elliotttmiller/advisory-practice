@@ -237,10 +237,10 @@ export class IntegrationsService {
     data: Partial<IntegrationConfig>
   ): Promise<IntegrationConfig | null> {
     const index = this.integrations.findIndex((int) => int.id === id);
-    if (index === -1) return null;
+    if (index === -1) {return null;}
 
     const integration = this.integrations[index];
-    if (!integration) return null;
+    if (!integration) {return null;}
 
     const updated: IntegrationConfig = {
       ...integration,
@@ -424,7 +424,7 @@ export class IntegrationsService {
    */
   private async processWebhook(eventId: string): Promise<void> {
     const event = this.webhookEvents.find((e) => e.id === eventId);
-    if (!event) return;
+    if (!event) {return;}
 
     try {
       // Process based on event type
