@@ -58,5 +58,24 @@ module.exports = {
         'no-unused-vars': 'off', // TypeScript handles this
       },
     },
+    {
+      files: ['**/*.spec.ts', '**/*.test.ts', '**/__tests__/**/*.ts'],
+      env: {
+        jest: true,
+      },
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        jest: 'readonly',
+      },
+      rules: {
+        'no-console': 'off', // Allow console in tests
+      },
+    },
   ],
 };

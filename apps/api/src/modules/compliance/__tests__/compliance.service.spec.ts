@@ -38,7 +38,7 @@ describe('ComplianceService', () => {
       );
 
       expect(result.status).toBe('pending');
-      expect(result.findings).toContain('Misleading term "no risk" found - requires disclosure');
+      expect(result.findings).toContain('Prohibited term "no risk" found - requires removal');
     });
 
     it('should detect performance claims', async () => {
@@ -90,7 +90,7 @@ describe('ComplianceService', () => {
       );
 
       expect(result.status).toBe('pending');
-      expect(result.findings).toContain('Superlative language requires substantiation');
+      expect(result.findings).toContain('Superlative language "best" requires substantiation');
     });
 
     it('should approve compliant communication', async () => {
