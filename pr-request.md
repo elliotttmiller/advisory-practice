@@ -1,295 +1,191 @@
-# PR TASK DOCUMENT: TAMP FRONTEND UI/UX DEVELOPMENT
-## DEVELOPER SPECIALIST EXECUTION AUTHORITY
+# REVISED PROJECT REQUEST DOCUMENT: HYBRID ECOSYSTEM OPTIMIZATION
+## Developer Specialist Execution Authority
 
 ---
 
 ## EXECUTIVE SUMMARY
-This document defines the comprehensive development tasks required to complete the frontend user interface and experience for a Turnkey Asset Management Platform (TAMP) within the financial advisory practice platform. Based on analysis of the existing GitHub repository and industry standards, this blueprint focuses exclusively on building professional, compliant, and efficient TAMP-specific user interfaces within the `apps/web` application. The developer specialist will leverage the existing UI/UX-only development mode (`dev:mock`) to rapidly iterate and polish core TAMP interfaces to production-grade quality.
+This document outlines a strategic realignment of the `advisory-practice` platform development. The approach shifts from building a general-purpose TAMP to optimizing the platform as a **comprehensive practice management hub** that *integrates with* leading industry TAMP providers (like LPL's offerings) and other best-of-breed third-party services. The primary objective is to leverage the existing, robust codebase (`apps/web`, `apps/api`, `packages/shared`) as the strategic integration hub, focusing development efforts on building the unique, differentiating features that provide a unified, branded experience while integrating with specialized external services where building in-house offers no advantage.
 
 ---
 
-## I. CURRENT DEVELOPMENT WORKFLOW UTILIZATION
+## I. DEVELOPMENT FOCUS: HYBRID ECOSYSTEM STRATEGY
 
-### A. Leveraging Existing UI/UX-Only Development Mode
-**Objective**: Utilize the already implemented development environment where frontend UI/UX for TAMP features can be iterated rapidly without starting backend services.
+### A. Internal Development Priorities (Build)
+**Objective**: Complete and optimize the core platform components that provide unique value, ensure a unified user experience, and manage the integration ecosystem.
 
-**Current State**:
-- **TAMP Mock Data Layer**: Comprehensive, realistic static JSON mock data sets representing API responses for TAMP features (Models, Holdings, Transactions, Performance, Rebalancing, Model Portfolios) across various application states (loading, success, error, empty, populated) are available.
-- **TAMP Mock API Service**: A service/module within `apps/web` intercepts TAMP-specific API calls (e.g., `/api/models`, `/api/portfolios`, `/api/rebalancing`) when the `NEXT_PUBLIC_MOCK_MODE=true` environment variable is enabled, returning pre-defined mock data.
-- **Development Script**: The dedicated script `npm run dev:mock` (or equivalent) starts the frontend in the isolated TAMP UI/UX development mode.
-- **Documentation**: Project documentation explains how to use the TAMP UI/UX-only mode, update TAMP-specific mock data, and switch back to full-stack development.
+**1. Core Platform Services (`apps/api`)**
 
-**Execution Requirement**:
-- **Primary Development Mode**: All TAMP UI/UX development tasks must be executed using the existing `dev:mock` environment to maximize iteration speed and efficiency.
-- **Mock Data Maintenance**: Ensure mock data accurately reflects TAMP workflows and is updated as UI requirements evolve.
+- **Authentication & Authorization Service**:
+  - **Task**: Complete the OAuth 2.0 PKCE flow, MFA enforcement, session management, and RBAC system as defined in the knowledge base blueprint. Integrate with an external Identity Provider (IDP) like Auth0 for core authentication, but manage internal permissions and user lifecycle orchestration.
+  - **Deliverable**: Fully functional authentication service with secure session management and role-based access control for Advisor, Client, and Compliance Officer roles.
 
-**Expected Outcome**: Rapid development and refinement of TAMP UI components and investment workflows without dependency on backend services, leveraging the established mock infrastructure.
+- **Client Management Service**:
+  - **Task**: Implement the complete client profile management, including core data (name, contact, risk tolerance), advisor assignment, and integration mapping (external IDs for TAMP, CRM). Build the client onboarding workflow UI in `apps/web`.
+  - **Deliverable**: CRUD operations for client profiles, secure data storage, and synchronization points for external service IDs.
 
-### B. Component Development Environment Usage
-**Objective**: Utilize the existing optimal environment for isolated UI component development and testing, specifically tailored for financial data visualization and TAMP workflows.
+- **Compliance Engine Service**:
+  - **Task**: Finalize the implementation of SEC Marketing Rule 206(4)-1 and FINRA Rule 2210 validation logic, approval workflows, and audit trail generation as defined in the blueprint. This handles internal compliance tasks (marketing content, client communications) and potentially oversees data from integrated services.
+  - **Deliverable**: Automated compliance checking for internal content, approval workflows, and comprehensive audit logging.
 
-**Current State**:
-- **Storybook Integration**: Storybook is set up within `apps/web` for isolated component development.
-- **Financial Data Visualization Library**: A robust charting library is integrated.
-- **Design Token System**: A comprehensive design token system using Tailwind CSS variables is implemented.
-- **Component Library Structure**: UI components are organized with clear separation.
-- **Accessibility Testing Integration**: axe-core accessibility testing is integrated.
+- **Reporting & Analytics Service**:
+  - **Task**: Develop the service to aggregate data from internal platform activities (user actions, compliance events) and *integrated* external services (portfolio performance from TAMP, AUM from CRM). Create APIs for unified reporting.
+  - **Deliverable**: Aggregated data models and API endpoints for advisor and firm-level reporting dashboards.
 
-**Execution Requirement**:
-- **Leverage Existing Tools**: Utilize Storybook for developing and testing TAMP-specific components in isolation.
-- **Adhere to Design Tokens**: Strictly follow the established design token system for consistent styling.
-- **Prioritize Accessibility**: Ensure all new TAMP components meet accessibility standards during development.
+- **Integration Orchestration Service**:
+  - **Task**: Build the core framework within `apps/api` to connect to external APIs (TAMP, CRM, Market Data). Implement data normalization, secure credential storage (HashiCorp Vault or similar), webhook handling, and API rate limiting/fallbacks.
+  - **Deliverable**: Reusable adapter patterns and services for connecting to external providers.
 
-**Expected Outcome**: Efficient and consistent development of high-quality TAMP UI components using the established toolchain.
+**2. Frontend Applications (`apps/web`, `apps/admin`)**
 
----
+- **Advisor Dashboard (UI)**:
+  - **Task**: Create the unified advisor interface. Pull together client lists (from internal service), basic portfolio summaries (fetched from TAMP via internal API), compliance tasks (from internal engine), marketing leads (from CRM via internal API), and communication history (internal). Focus on advisor workflow efficiency.
+  - **Deliverable**: A single-page application dashboard providing a holistic view of the advisor's practice.
 
-## II. CORE TAMP UI/UX IMPLEMENTATION SPECIFICATIONS
+- **Client Portal (UI)**:
+  - **Task**: Create the branded client interface. Display their profile (internal), portfolio performance summary (fetched from TAMP via internal API), goal progress (if integrated with planning tool), communication history (internal), and documents (internal + synced). Prioritize client experience and understanding.
+  - **Deliverable**: A secure, branded portal for clients to view their information and interact with their advisor.
 
-### A. Advisor TAMP Dashboard Interface Development
-**Objective**: Deliver a comprehensive, professional dashboard for advisors to manage client portfolios, models, and investment workflows.
+- **Admin Dashboard (UI)**:
+  - **Task**: Complete the UI for compliance officers and administrators. Manage users (internal), review marketing content (using internal engine), monitor system events (audit logs from internal service), and oversee client management processes. This is the internal operations hub.
+  - **Deliverable**: A comprehensive administrative interface for platform oversight and compliance management.
 
-**Required Components**:
-- **Dashboard Layout**: Create a responsive, accessible dashboard layout with navigation, header, and content areas optimized for financial data density and workflows, following WCAG 2.1 AA standards.
-- **Client Portfolio Overview Section**: Design and implement visual components for managing client portfolios linked to models, including:
-  - **Portfolio List View**: Table showing client name, account value, assigned model, current drift from target, performance YTD/1Y/3Y, last rebalanced date.
-  - **Quick Actions**: Buttons/links for common tasks (Rebalance, View Details, Assign Model).
-  - **Drift Visualization**: Quick visual indicators (e.g., gauges, sparklines) for portfolio drift from assigned model.
-- **Model Management Section**: Interface for advisors to browse, select, and assign model portfolios to clients:
-  - **Model Library**: Grid or table view of available models with name, objective, risk level, performance, and holdings summary.
-  - **Model Details Modal/Panel**: Detailed view showing full holdings, weightings, performance history, and risk metrics for a selected model.
-  - **Assignment Workflow**: Intuitive process to select a client and assign a model, with confirmation steps.
-- **Rebalancing Center Section**: Interface for managing rebalancing tasks:
-  - **Rebalance Queue**: List of portfolios requiring rebalancing, showing current holdings vs. target, suggested trades (buys/sells), and drift amount.
-  - **Rebalance Actions**: Buttons to approve, modify, or skip rebalancing recommendations for individual accounts or in bulk.
-  - **Rebalance History**: View of past rebalancing activities with details on trades executed.
-- **Performance Analytics Section**: Tools for advisors to analyze portfolio and model performance:
-  - **Performance Charts**: Interactive charts comparing client portfolio performance to assigned model and benchmarks over time.
-  - **Attribution Analysis**: (If applicable) Breakdown of performance drivers.
-  - **Goal Tracking**: (If goals are linked) Progress visualization against client objectives.
+- **Marketing & Lead Capture (UI)**:
+  - **Task**: Refine the public-facing website, landing pages, and lead capture forms. Implement the workflow for new lead data (validated by internal rules) to be passed to the CRM (via internal integration service). Ensure all marketing content flows through the internal compliance engine.
+  - **Deliverable**: A lead generation and marketing compliance workflow integrated into the platform.
 
-**Design Requirements**:
-- Professional financial services aesthetic with clean typography and strategic use of color (e.g., green/red for performance, neutral tones for data).
-- Consistent spacing system based on 8px baseline grid optimized for data density.
-- Responsive design supporting desktop (primary), tablet, and mobile viewports (with appropriate feature prioritization).
-- WCAG 2.1 AA compliance with proper color contrast (especially for data visualization), keyboard navigation, and screen reader support for complex tables/charts.
-- Loading states and error handling for all asynchronous operations (portfolio fetch, rebalance calculation, etc.).
+- **Communication Center (UI)**:
+  - **Task**: Build the interface for advisors and clients to communicate securely within the platform (messages, potentially linking to external tools). Store communication history internally and link to client profiles.
+  - **Deliverable**: A central hub for advisor-client communication managed within the platform.
 
-### B. Client TAMP Portfolio View Interface Development
-**Objective**: Deliver a clear, professional interface for clients to view their managed portfolio performance and allocation.
+**3. Internal Data Management & Infrastructure**
 
-**Required Components**:
-- **Portfolio Overview Section**: Design and implement visual components for client portfolio performance visualization, including:
-  - **Performance Summary**: Key metrics like current value, YTD change ($ and %), 1Y change ($ and %).
-  - **Performance Charts**: Line chart showing portfolio value and performance over time (1M, 1Y, 3Y, 5Y, YTD, etc.), ideally compared to a broad benchmark.
-  - **Asset Allocation Visualization**: Pie or bar chart showing current holdings by asset class or security, with clear labels and values.
-  - **Goal Progress (if applicable)**: Visual indicator of progress towards defined financial goals.
-- **Model Information Section**: Provide context about the underlying investment strategy:
-  - **Model Name & Objective**: Clearly display the name and investment objective of the assigned model portfolio.
-  - **Model Holdings Summary**: (Optional, simplified) High-level view of major holdings or asset classes within the model.
-  - **Benchmark Information**: Show the benchmark the model aims to track or outperform.
-- **Activity/Transaction History Section**: Display recent activity related to the portfolio:
-  - **Rebalancing History**: List of recent rebalancing events with dates and brief descriptions ("Portfolio rebalanced to target allocation").
-  - **Dividend/Income**: (If applicable) List of income distributions.
-- **Document Access Section**: Link to relevant documents (e.g., model fact sheets, performance reports) stored in the document management system.
+- **Document Management (Internal Storage)**:
+  - **Task**: Complete the UI and backend logic for managing internal documents (notes, custom agreements) stored securely (MinIO/S3) with SEC Rule 17a-4(f) compliance. Integrate with external e-signature tools.
+  - **Deliverable**: A secure, compliant document vault accessible within the advisor and client portals.
 
-**Design Requirements**:
-- Clear, uncluttered layout focusing on key performance and allocation data.
-- Use of positive/negative color coding for performance figures.
-- Consistent with overall brand identity while emphasizing financial data clarity.
-- Responsive design ensuring charts and tables remain readable on smaller screens.
-- WCAG 2.1 AA compliance, especially for color use in data visualization and table accessibility.
+### B. Third-Party Integration Priorities (Buy/Integrate)
 
-### C. Marketing & Lead Capture Interface (TAMP Context)
-**Objective**: Enhance the existing public-facing website experience to highlight TAMP benefits and convert visitors to leads while maintaining regulatory compliance.
+**Objective**: Strategically integrate with 5-7 key third-party providers for specialized financial services.
 
-**Required Components (Enhanced for TAMP)**:
-- **Landing Page Enhancement (TAMP Focus)**: Enhance the existing landing page to emphasize TAMP benefits:
-  - **Hero Section**: Value proposition focusing on "Outsourced Investment Management," "Professional Oversight," "Access to Institutional Strategies."
-  - **Services Overview**: Highlight TAMP services (Portfolio Management, Rebalancing, Reporting) with relevant icons.
-  - **Advisor Bio Section**: Maintain focus on advisor expertise, potentially mentioning TAMP partnership/philosophy.
-  - **Testimonials Section**: Include testimonials related to investment management quality, performance clarity, or peace of mind (with proper regulatory disclosures).
-  - **Contact Form**: Maintain existing compliance-approved fields.
-- **Services Page (TAMP Detail)**: Create detailed service descriptions focusing on the TAMP offering:
-  - **Investment Philosophy**: How the advisor leverages TAMP models.
-  - **Model Selection Process**: How models are chosen and monitored.
-  - **Rebalancing Frequency & Process**: Explain the automated rebalancing benefit.
-  - **Performance Reporting**: Detail the reporting provided through the platform.
-  - **FAQs Section**: Address common questions about TAMPs, model portfolios, and fees.
+- **Primary TAMP Provider Integration**:
+  - **Provider**: LPL (MWP, OMP, GWP, MS, SAM), Envestnet, or SEI.
+  - **Scope**: Integrate portfolio data (holdings, performance, allocation), model assignment, and rebalancing execution/status into the advisor and client dashboards via the internal API.
 
-**Compliance Requirements (Maintained)**:
-- All marketing content must include required regulatory disclosures.
-- Testimonials must include proper context and representative sample disclaimer.
-- Performance claims (if any) must include required benchmark comparisons and time periods.
-- Contact forms must include privacy policy links and consent checkboxes.
+- **Primary CRM Integration**:
+  - **Provider**: Redtail CRM, Wealthbox.
+  - **Scope**: Sync client contact information, interaction history, tasks, and pipeline data. Use this for lead management and advisor workflow.
 
-### D. Authentication & Onboarding Flows (TAMP Context)
-**Objective**: Ensure existing seamless and secure user authentication and onboarding experiences correctly support TAMP access.
+- **Market Data Integration**:
+  - **Provider**: Morningstar, Refinitiv.
+  - **Scope**: Fetch real-time and historical pricing, fund/ETF data for display in advisor/client UIs and internal calculations.
 
-**Required Components**:
-- **Login/Registration Flow**: Maintain existing secure authentication with role-based access (Advisor vs. Client).
-- **Advisor Onboarding Wizard (if applicable)**: (For new advisors joining the platform, if relevant) Process for linking to TAMP provider accounts, setting preferences.
-- **Client Onboarding Wizard**: Maintain general client onboarding (risk profiling, goals, documents) but ensure integration points with TAMP model assignment are clear for advisors during the advisor-assisted setup.
+- **Document Generation & e-Signature Integration**:
+  - **Provider**: DocuSign, Adobe Sign.
+  - **Scope**: Trigger document generation/signing from workflows, link signed documents back to client profiles.
 
-**Security Requirements (Maintained)**:
-- Password fields with visibility toggle and strength indicators.
-- Proper session management with timeout handling.
-- Secure form submission with CSRF protection.
-- Role-based UI rendering based on permissions (Advisor sees TAMP tools, Client sees portfolio view).
+- **Identity Provider (IDP) Integration**:
+  - **Provider**: Auth0, Okta.
+  - **Scope**: Handle core user authentication, SSO, MFA. The internal service manages authorization and user lifecycle *within* the platform.
 
 ---
 
-## III. DESIGN SYSTEM & BRANDING INTEGRATION
+## II. SCOPE OF WORK: KEY EPICS & FEATURES
 
-### A. Brand Identity Implementation (TAMP Context)
-**Objective**: Apply the firm's brand identity consistently across all TAMP UI components while ensuring financial data clarity.
+### Workstream I: Complete Internal Platform Core (`apps/api`, `packages/shared`)
 
-**Core Requirements**:
-- **Typography System**: Implement the brand's typography system with appropriate hierarchy for financial data (e.g., clear distinction between labels, values, and performance figures).
-- **Color Palette**: Configure the Tailwind CSS color palette, ensuring brand colors work well for financial data visualization (positive/negative colors must be clear and accessible).
-- **Logo Integration**: Add the firm's logo to header components.
-- **Icon System**: Implement a consistent icon system using SVG icons relevant to investment management (portfolio, chart, rebalance, etc.).
-- **Financial Data Styling**: Apply brand-consistent styling to financial elements like performance figures, tables, and charts, prioritizing clarity and readability.
+**Epic 1: Core Services Completion**
+- **Goal**: Finalize the internal services identified as "Build".
+- **Tasks**:
+  - Complete Authentication Service implementation.
+  - Complete Client Management Service implementation.
+  - Complete Compliance Engine implementation (validation, workflows, audit trails).
+  - Build Reporting & Analytics aggregation service.
+  - Build Integration Orchestration framework.
+- **Deliverable**: All internal services fully functional and tested.
 
-**Expected Outcome**: A cohesive brand experience within the TAMP interface that maintains professional identity while ensuring financial data is presented clearly and accessibly.
+### Workstream II: Frontend Implementation (`apps/web`, `apps/admin`)
 
-### B. Responsive Design Implementation (TAMP Context)
-**Objective**: Ensure optimal user experience for TAMP features across all device sizes, acknowledging that advisor tasks may be primarily desktop while client views might be mobile-heavy.
+**Epic 2: Advisor Portal UI**
+- **Goal**: Build the unified advisor dashboard.
+- **Tasks**:
+  - Implement Advisor Dashboard layout and core widgets (AUM, activity feed, tasks).
+  - Implement Client List Page with search/filter.
+  - Implement Client Detail Page with tabs (Overview, Portfolio, Documents, Notes).
+  - Implement Compliance Center UI (Review queue, detail view).
+- **Deliverable**: Fully functional Advisor Portal with mock data integration for external services initially.
 
-**Core Requirements**:
-- **Mobile-First Approach**: Develop client-facing components using a mobile-first responsive design strategy.
-- **Advisor Desktop Focus**: Optimize advisor dashboard for desktop/larger screens to handle complex data tables and multiple panels.
-- **Breakpoint Strategy**: Implement a consistent breakpoint strategy using Tailwind CSS responsive utilities, considering data density needs.
-- **Touch Targets**: Ensure all interactive elements on client views have appropriate touch target sizes.
-- **Navigation Patterns**: Implement responsive navigation suitable for both advisor (potentially complex) and client (simpler) needs.
-- **Content Flow**: Ensure financial charts and tables reflow appropriately or become horizontally scrollable if necessary on smaller screens.
+**Epic 3: Client Portal UI**
+- **Goal**: Build the branded client portal.
+- **Tasks**:
+  - Implement Client Dashboard layout with portfolio summary.
+  - Implement Client Profile Management.
+  - Implement Document Vault UI.
+  - Implement Communication Center UI.
+- **Deliverable**: Fully functional Client Portal with mock data integration for external services initially.
 
-**Expected Outcome**: A seamless TAMP user experience that adapts to any device while maintaining usability and data clarity for both advisors and clients.
+**Epic 4: Admin Portal UI**
+- **Goal**: Complete the administrative dashboard.
+- **Tasks**:
+  - Implement User Management (Advisor list, add/edit).
+  - Implement Compliance Oversight (Review queue, audit logs).
+- **Deliverable**: Fully functional Admin Portal.
 
----
+### Workstream III: Integration Framework & Mocking
 
-## IV. UI/UX TESTING & QUALITY ASSURANCE (TAMP Context)
+**Epic 5: API Contract Definition & Mocking**
+- **Goal**: Define the data contracts for integration and implement mocking for development.
+- **Tasks**:
+  - Define TypeScript interfaces for data models exchanged with TAMP, CRM, Market Data providers.
+  - Implement MSW (Mock Service Worker) to simulate external API responses using these contracts.
+  - Ensure `apps/web` and `apps/admin` consume data from the mock service during `dev:mock` mode.
+- **Deliverable**: Clear API contracts and a fully functional mock environment for rapid UI development.
 
-### A. Visual Quality Assurance (TAMP Focus)
-**Objective**: Ensure pixel-perfect UI implementation for complex financial data displays.
-
-**Core Requirements**:
-- **Visual Regression Testing**: Implement visual regression testing for TAMP components, especially charts and data tables, to detect unintended UI changes.
-- **Cross-Browser Testing**: Test TAMP UI components across supported browsers, paying special attention to chart rendering and table display.
-- **Design Handoff Validation**: Validate TAMP UI implementation against design mockups, focusing on data visualization accuracy and clarity.
-- **Color Contrast Verification**: Ensure WCAG 2.1 AA compliance for all text and data visualization elements, especially performance figures.
-- **Spacing Consistency Check**: Verify consistent spacing implementation for financial data elements.
-
-**Expected Outcome**: Professional-grade TAMP UI quality with consistent visual implementation and cross-browser compatibility for financial data.
-
-### B. User Experience Validation (TAMP Focus)
-**Objective**: Ensure intuitive and efficient TAMP workflows through comprehensive testing.
-
-**Core Requirements**:
-- **Advisor Workflow Testing**: Develop test scripts for critical advisor TAMP journeys:
-  - Assigning a model portfolio to a client.
-  - Reviewing the rebalance queue and approving trades.
-  - Viewing client portfolio performance vs. model.
-- **Client Workflow Testing**: Test client portfolio viewing experience:
-  - Understanding portfolio allocation.
-  - Interpreting performance charts.
-  - Navigating to relevant documents.
-- **Accessibility Testing (TAMP Focus)**: Conduct comprehensive accessibility testing for financial data tables and charts.
-- **Performance Optimization (TAMP Focus)**: Optimize UI performance for rendering potentially large datasets (e.g., detailed holdings, long performance histories) using techniques like virtualization.
-- **Error State Handling (TAMP Focus)**: Implement comprehensive error handling for TAMP-specific scenarios (e.g., failed performance data fetch, rebalance calculation errors).
-
-**Expected Outcome**: An intuitive, accessible, and high-performance TAMP user experience that meets professional standards.
+**Epic 6: Initial External Integrations**
+- **Goal**: Integrate with 1-2 key external services (e.g., TAMP, CRM) using the internal orchestration service.
+- **Tasks**:
+  - Configure API credentials for target providers securely.
+  - Implement adapter logic in `apps/api` to fetch/sync data from providers.
+  - Update `apps/web` and `apps/admin` to consume real data from the internal API for these services.
+- **Deliverable**: Live data from integrated external services displayed in the frontend applications.
 
 ---
 
-## V. DELIVERABLES & ACCEPTANCE CRITERIA
+## III. OUT OF SCOPE
 
-### A. TAMP UI/UX Deliverables
-**Required Outputs**:
-- **Advisor TAMP Dashboard**: Fully functional interface for managing client portfolios, models, rebalancing, and performance.
-- **Client TAMP Portfolio View**: Clear interface for clients to view their managed portfolio performance and allocation.
-- **Marketing Website (TAMP Context)**: Landing page and services page highlighting TAMP benefits.
-- **Authentication Flows**: Secure login/role separation supporting TAMP access.
-- **TAMP Component Library**: Reusable components for financial data display and TAMP-specific actions (e.g., model selector, rebalance grid).
-- **Design Token System**: Implementation including financial data state tokens.
-
-**Quality Requirements**:
-- Consistent visual design following brand guidelines within the TAMP context.
-- WCAG 2.1 AA accessibility compliance across all TAMP interfaces.
-- Responsive design supporting advisor (desktop-focused) and client (mobile-friendly) needs.
-- Optimized performance for rendering financial data.
-- Comprehensive error handling for TAMP-specific operations.
-
-### B. Development Environment Deliverables
-**Required Outputs**:
-- **TAMP UI/UX-Only Development Mode**: Confirmed functional mock data system for TAMP features and development script (already implemented).
-- **Storybook Setup**: Configured with TAMP-specific component examples.
-- **Development Documentation**: Confirmed instructions for using the TAMP UI/UX-only development workflow (already documented).
-- **Testing Setup**: (If applicable) Visual regression testing configuration for TAMP components.
-
-**Quality Requirements**:
-- Seamless developer experience for TAMP-specific UI work using existing tools.
-- Clear documentation available.
-- Efficient iteration cycles for TAMP features using `dev:mock`.
-
-### C. Acceptance Criteria
-**Functional Acceptance (TAMP)**:
-- Advisor can view client portfolios with model assignment and drift.
-- Advisor can assign models to clients.
-- Advisor can see and interact with the rebalance queue.
-- Client can view their portfolio performance and allocation.
-- All TAMP UI components render correctly in `dev:mock` mode.
-- TAMP-specific user flows function as specified.
-- Existing `dev:mock` mode operates correctly for all new TAMP features.
-
-**Quality Acceptance (TAMP)**:
-- Zero ESLint and Prettier errors in TAMP frontend code.
-- 100% TypeScript type safety for UI components.
-- All TAMP UI elements pass automated accessibility tests.
-- Financial data visualizations are clear and accurate.
-- Performance metrics for data-heavy components are acceptable.
-
-**Compliance Acceptance (Maintained)**:
-- All marketing content includes required disclosures.
-- Performance data display includes appropriate context/disclaimers if shown.
-- UI supports underlying compliance checks (e.g., displaying compliance status of models).
+- **Building a TAMP**: No investment in core investment management, rebalancing, or custodial functions internally.
+- **Building a CRM**: No development of client relationship management features beyond internal mappings and sync.
+- **Building a Financial Planning Tool**: No development of complex financial modeling software.
+- **Building a Document Generation Engine**: No development of complex document templates or e-signature logic beyond API integration.
+- **Full Integration Implementation**: This PR focuses on the internal platform and the framework for integration. Full integration with all providers will be phased in later.
 
 ---
 
-## VI. EXECUTION AUTHORITY & CONSTRAINTS
+## IV. ACCEPTANCE CRITERIA & SUCCESS METRICS
+
+- **Final Deliverable**: A functional, integrated platform where core features (authentication, client management, compliance, basic reporting, communication) are built internally, and data from key external services (TAMP, CRM) is displayed in the advisor and client portals.
+- **Success Metric**: The `dev:mock` mode provides a complete, interactive experience for all defined UI features using mock data.
+- **Success Metric**: The internal API can successfully connect to and retrieve data from at least one external provider (e.g., TAMP).
+- **Success Metric**: The advisor and client portals display a unified view combining internal data and data from integrated external services.
+- **Success Metric**: The API Contract for core external integrations is documented and committed.
+- **Acceptance Criterion**: A stakeholder can log in (advisor or client), navigate the relevant portal, view client/portfolio data (combining internal and mock/real external data), and perform basic actions (e.g., view compliance tasks, communicate with advisor) without critical errors.
+
+---
+
+## V. DEVELOPER SPECIALIST AUTHORITY & CONSTRAINTS
 
 ### A. Developer Specialist Authority
-**Full Implementation Authority (TAMP Focus)**:
-- Complete authority over TAMP UI component implementation details within specified requirements.
-- Authority to select specific UI libraries for financial data visualization (within existing project constraints).
-- Authority to define TAMP component APIs and props interfaces.
-- Authority to structure the TAMP component library.
-- Authority to implement visual design details within brand guidelines for TAMP features.
-
-**Required Consultation Points**:
-- Final TAMP visual design approval from brand stakeholders.
-- Compliance review of TAMP-specific messaging or data displays.
-- Accessibility audit sign-off.
-- Performance benchmark approval for data-heavy components.
+- **Full authority** over the implementation of internal platform features defined in the "Build" section.
+- **Authority** to select specific UI libraries for data visualization within the existing Next.js/Tailwind stack.
+- **Authority** to define the structure and implementation details of the integration adapters.
+- **Authority** to refine the API contracts based on actual external provider APIs encountered during integration.
 
 ### B. Non-Negotiable Constraints
-**Brand Requirements**:
-- Must adhere to provided brand guidelines.
-- Maintain professional financial services aesthetic.
-
-**Compliance Requirements**:
-- All marketing content must include required regulatory disclosures.
-- UI must support underlying compliance logic (e.g., showing compliance status).
-
-**Technical Constraints**:
-- Must use Next.js 14, Tailwind CSS, TypeScript as defined.
-- Maintain monorepo structure.
-- Ensure compatibility with existing API contracts for TAMP data.
-- Leverage the existing `dev:mock` mode for development.
+- **Compliance Adherence**: All internal features must strictly support and enforce the underlying regulatory compliance requirements (SEC, FINRA, GLBA).
+- **Security Standards**: All internal code and integrations must meet SOC 2 Type II standards as defined in the original blueprint.
+- **Architecture Adherence**: Must build upon the existing monorepo structure (`apps/`, `packages/`) and technology stack (Next.js, NestJS, TypeScript, Tailwind CSS).
+- **Integration Strategy**: Focus must remain on the hybrid approach, building core platform features while integrating with external services for specialized functions. Avoid building full-featured replacements for established providers within the scope of this PR.
 
 ---
 
 ## CONCLUSION
-This blueprint defines the complete specification for achieving a production-grade TAMP frontend experience for the financial advisory practice platform. The focus is exclusively on TAMP-specific UI/UX development, leveraging the existing streamlined local development environment (`dev:mock`). The developer specialist is authorized to execute all frontend implementation decisions within the defined constraints, with final acceptance based on the specified acceptance criteria.
-
-The deliverable will be a polished, professional, and compliant TAMP user interface that provides exceptional experience for advisors managing client portfolios and clients viewing their managed investments, ready for integration with the backend services when development progresses to that stage.
+This PRD refocuses development efforts on leveraging the existing, strong foundation of the `advisory-practice` platform. It prioritizes completing the internal platform components that provide unique value and control while strategically integrating with best-in-class external services. This hybrid approach is designed to deliver maximum value to advisors and clients efficiently and scalably.
