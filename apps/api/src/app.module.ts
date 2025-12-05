@@ -6,6 +6,7 @@ import { DocumentsModule } from './modules/documents/documents.module';
 import { ComplianceModule } from './modules/compliance/compliance.module';
 import { MarketingModule } from './modules/marketing/marketing.module';
 import { ReportingModule } from './modules/reporting/reporting.module';
+import { IntegrationsModule } from './modules/integrations/integrations.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -20,6 +21,7 @@ import { HealthController } from './health.controller';
     ComplianceModule,
     MarketingModule,
     ReportingModule,
+    IntegrationsModule,
   ],
   controllers: [HealthController],
   providers: [],

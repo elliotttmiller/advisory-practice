@@ -34,6 +34,12 @@ export interface Client {
   assetsUnderManagement: number;
   onboardingStatus: OnboardingStatus;
   advisorId: string;
+  // External integration IDs
+  externalIds?: {
+    tampId?: string;
+    crmId?: string;
+    custodianId?: string;
+  };
   createdAt: Date;
   updatedAt: Date;
 }
@@ -107,7 +113,9 @@ export interface ComplianceCheck {
   targetType: 'document' | 'communication' | 'client' | 'transaction';
   targetId: string;
   status: ComplianceCheckStatus;
+  severity?: ComplianceSeverity;
   findings: string[];
+  recommendations?: string[];
   reviewedBy?: string;
   reviewedAt?: Date;
   escalatedTo?: string;
@@ -124,6 +132,108 @@ export type ComplianceRuleType =
   | 'AML_KYC';
 
 export type ComplianceCheckStatus = 'pending' | 'approved' | 'rejected' | 'escalated';
+
+export type ComplianceSeverity = 'low' | 'medium' | 'high' | 'critical';
+
+// Integration Types for Hybrid Ecosystem
+export type IntegrationProviderType = 'TAMP' | 'CRM' | 'MARKET_DATA' | 'DOCUMENT' | 'IDP';
+
+export type IntegrationProvider =
+  | 'LPL'
+  | 'ENVESTNET'
+  | 'SEI'
+  | 'REDTAIL'
+  | 'WEALTHBOX'
+  | 'MORNINGSTAR'
+  | 'REFINITIV'
+  | 'DOCUSIGN'
+  | 'ADOBE_SIGN'
+  | 'AUTH0'
+  | 'OKTA';
+
+export interface IntegrationConfig {
+  id: string;
+  provider: IntegrationProvider;
+  type: IntegrationProviderType;
+  name: string;
+  enabled: boolean;
+  status: 'active' | 'inactive' | 'error' | 'pending_setup';
+  lastSyncAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Portfolio/TAMP Data Types
+export type AssetClass =
+  | 'domestic_equity'
+  | 'international_equity'
+  | 'fixed_income'
+  | 'alternatives'
+  | 'cash'
+  | 'real_estate'
+  | 'commodities';
+
+export interface SecurityHolding {
+  symbol: string;
+  name: string;
+  assetClass: AssetClass;
+  targetWeight: number;
+  currentWeight?: number;
+  shares?: number;
+  price?: number;
+  value?: number;
+  change?: number;
+  changePercent?: number;
+}
+
+export interface PortfolioSummary {
+  totalValue: number;
+  cashBalance: number;
+  drift: number;
+  driftStatus: 'within_tolerance' | 'approaching_threshold' | 'needs_rebalancing';
+  performance: {
+    mtd: number;
+    qtd: number;
+    ytd: number;
+    oneYear?: number;
+    sinceInception: number;
+  };
+}
+
+// Communication Types
+export interface Message {
+  id: string;
+  threadId?: string;
+  senderId: string;
+  senderType: 'advisor' | 'client' | 'system';
+  recipientId: string;
+  recipientType: 'advisor' | 'client';
+  subject?: string;
+  content: string;
+  attachments?: MessageAttachment[];
+  read: boolean;
+  archived: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface MessageAttachment {
+  id: string;
+  name: string;
+  mimeType: string;
+  size: number;
+  storageKey: string;
+}
+
+export interface MessageThread {
+  id: string;
+  participants: string[];
+  subject: string;
+  lastMessageAt: Date;
+  messageCount: number;
+  unreadCount: number;
+  createdAt: Date;
+}
 
 export interface ApiResponse<T> {
   success: boolean;
