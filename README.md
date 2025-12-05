@@ -82,7 +82,41 @@ npm run dev --workspace=apps/web
 npm run dev --workspace=apps/api
 ```
 
-### 4. Access Applications
+### 4. UI/UX Development Mode (Mock Mode)
+
+For rapid UI/UX iteration without requiring backend services:
+
+```bash
+# Run frontend in mock mode (no backend required)
+npm run dev:mock --workspace=apps/web
+
+# Or from the apps/web directory
+cd apps/web && npm run dev:mock
+```
+
+**Mock Mode Features:**
+- No backend services required (PostgreSQL, Redis, MinIO, API)
+- Pre-populated mock data for all entities (clients, documents, compliance, marketing, reports)
+- Simulated API responses with realistic delays
+- Multiple data states available (loading, success, error, empty)
+
+**Mock Credentials for Login:**
+- Email: `john.doe@example.com`, Password: `Password123!`
+- MFA Code (when enabled): `123456`
+
+**When to use Mock Mode:**
+- UI/UX prototyping and design iteration
+- Component development and styling
+- Frontend testing without backend dependencies
+- Demo and presentation preparation
+
+**When to switch to Full-Stack Mode:**
+- Integration testing with real API
+- Testing data persistence and mutations
+- End-to-end feature validation
+- Production deployment preparation
+
+### 5. Access Applications
 
 - **Web Application**: http://localhost:3000
 - **API Server**: http://localhost:4000
@@ -91,17 +125,18 @@ npm run dev --workspace=apps/api
 
 ## 📜 Available Scripts
 
-| Command                    | Description                                |
-| -------------------------- | ------------------------------------------ |
-| `npm run dev`              | Start all apps in development mode         |
-| `npm run build`            | Build all applications                     |
-| `npm run lint`             | Run ESLint across all packages             |
-| `npm run test`             | Run tests across all packages              |
-| `npm run test:coverage`    | Run tests with coverage reports            |
-| `npm run typecheck`        | Run TypeScript type checking               |
-| `npm run format`           | Format code with Prettier                  |
-| `npm run security:audit`   | Run security audit on dependencies         |
-| `npm run compliance:check` | Run compliance validation                  |
+| Command                                         | Description                                        |
+| ----------------------------------------------- | -------------------------------------------------- |
+| `npm run dev`                                   | Start all apps in development mode                 |
+| `npm run dev:mock --workspace=apps/web`         | Start frontend in mock mode (no backend required)  |
+| `npm run build`                                 | Build all applications                             |
+| `npm run lint`                                  | Run ESLint across all packages                     |
+| `npm run test`                                  | Run tests across all packages                      |
+| `npm run test:coverage`                         | Run tests with coverage reports                    |
+| `npm run typecheck`                             | Run TypeScript type checking                       |
+| `npm run format`                                | Format code with Prettier                          |
+| `npm run security:audit`                        | Run security audit on dependencies                 |
+| `npm run compliance:check`                      | Run compliance validation                          |
 
 ## 🔒 Security Features
 
