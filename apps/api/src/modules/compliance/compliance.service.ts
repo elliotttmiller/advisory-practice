@@ -65,7 +65,7 @@ export class ComplianceService {
 
     // FINRA 2210 communication checks
     if (type === 'FINRA_2210') {
-      if (!content.includes('past performance')) {
+      if (!content.toLowerCase().includes('past performance')) {
         findings.push('Missing past performance disclaimer');
       }
       if (content.toLowerCase().includes('best') || content.toLowerCase().includes('top')) {
