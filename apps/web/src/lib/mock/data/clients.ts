@@ -136,7 +136,7 @@ export function getMockClientsResponse(
   status?: Client['status']
 ): ApiResponse<Client[]> {
   let filteredClients = [...mockClients];
-  
+
   if (status) {
     filteredClients = filteredClients.filter((c) => c.status === status);
   }
@@ -170,7 +170,7 @@ export function getMockClientsResponse(
 // Get single client by ID
 export function getMockClientById(id: string): ApiResponse<Client> {
   const client = mockClients.find((c) => c.id === id);
-  
+
   if (!client) {
     return {
       success: false,

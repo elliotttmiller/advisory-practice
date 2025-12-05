@@ -10,16 +10,16 @@ interface UserPayload {
 
 /**
  * Current User decorator
- * 
+ *
  * Extracts the current user from the request after JWT authentication.
  * Use this to get the authenticated user's details in route handlers.
- * 
+ *
  * Example:
  *   @Get('profile')
  *   getProfile(@CurrentUser() user: TokenPayload) {
  *     return this.userService.findById(user.sub);
  *   }
- * 
+ *
  * You can also extract specific properties:
  *   @Get('profile')
  *   getProfile(@CurrentUser('email') email: string) {

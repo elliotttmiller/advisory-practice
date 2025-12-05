@@ -37,10 +37,7 @@ class MockApiClient {
   }
 
   // Generic request handler
-  async request<T>(
-    endpoint: string,
-    options: MockRequestOptions = {}
-  ): Promise<ApiResponse<T>> {
+  async request<T>(endpoint: string, options: MockRequestOptions = {}): Promise<ApiResponse<T>> {
     const { method = 'GET', body, params, delay = this.defaultDelay } = options;
 
     // Simulate network delay
@@ -81,7 +78,13 @@ class MockApiClient {
       case 'portfolios':
       case 'models':
       case 'rebalancing':
-        return this.handlePortfolioRequest(resource, id, subResource, method, params) as ApiResponse<T>;
+        return this.handlePortfolioRequest(
+          resource,
+          id,
+          subResource,
+          method,
+          params
+        ) as ApiResponse<T>;
       default:
         return {
           success: false,
@@ -212,7 +215,9 @@ class MockApiClient {
       }
       const page = Number(params?.page) || 1;
       const pageSize = Number(params?.pageSize) || 10;
-      const status = params?.status as Parameters<typeof mockData.getMockComplianceChecksResponse>[2];
+      const status = params?.status as Parameters<
+        typeof mockData.getMockComplianceChecksResponse
+      >[2];
       const type = params?.type as Parameters<typeof mockData.getMockComplianceChecksResponse>[3];
       return mockData.getMockComplianceChecksResponse(page, pageSize, status, type);
     }
@@ -247,7 +252,9 @@ class MockApiClient {
       }
       const page = Number(params?.page) || 1;
       const pageSize = Number(params?.pageSize) || 10;
-      const status = params?.status as Parameters<typeof mockData.getMockMarketingContentResponse>[2];
+      const status = params?.status as Parameters<
+        typeof mockData.getMockMarketingContentResponse
+      >[2];
       const type = params?.type as Parameters<typeof mockData.getMockMarketingContentResponse>[3];
       return mockData.getMockMarketingContentResponse(page, pageSize, status, type);
     }
@@ -316,7 +323,9 @@ class MockApiClient {
         }
         const page = Number(params?.page) || 1;
         const pageSize = Number(params?.pageSize) || 10;
-        const riskLevel = params?.riskLevel as Parameters<typeof mockData.getMockModelPortfoliosResponse>[2];
+        const riskLevel = params?.riskLevel as Parameters<
+          typeof mockData.getMockModelPortfoliosResponse
+        >[2];
         return mockData.getMockModelPortfoliosResponse(page, pageSize, riskLevel);
       }
     }
@@ -334,7 +343,9 @@ class MockApiClient {
         const page = Number(params?.page) || 1;
         const pageSize = Number(params?.pageSize) || 10;
         const clientId = params?.clientId as string | undefined;
-        const driftStatus = params?.driftStatus as Parameters<typeof mockData.getMockClientPortfoliosResponse>[3];
+        const driftStatus = params?.driftStatus as Parameters<
+          typeof mockData.getMockClientPortfoliosResponse
+        >[3];
         return mockData.getMockClientPortfoliosResponse(page, pageSize, clientId, driftStatus);
       }
     }
@@ -355,7 +366,10 @@ class MockApiClient {
   }
 
   // Convenience methods
-  async get<T>(endpoint: string, params?: Record<string, string | number | undefined>): Promise<ApiResponse<T>> {
+  async get<T>(
+    endpoint: string,
+    params?: Record<string, string | number | undefined>
+  ): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, params ? { method: 'GET', params } : { method: 'GET' });
   }
 

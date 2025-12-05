@@ -101,7 +101,10 @@ export class ReportingService {
   }
 
   // Compliance-specific reports
-  async generateComplianceReport(period: 'monthly' | 'quarterly' | 'annual', generatedBy: string): Promise<Report> {
+  async generateComplianceReport(
+    period: 'monthly' | 'quarterly' | 'annual',
+    generatedBy: string
+  ): Promise<Report> {
     return this.generateReport(
       `Compliance Report - ${period.charAt(0).toUpperCase() + period.slice(1)}`,
       'compliance',
@@ -123,11 +126,7 @@ export class ReportingService {
   }
 
   // Audit trail export (SEC/FINRA compliance)
-  async exportAuditTrail(
-    startDate: Date,
-    endDate: Date,
-    generatedBy: string
-  ): Promise<Report> {
+  async exportAuditTrail(startDate: Date, endDate: Date, generatedBy: string): Promise<Report> {
     return this.generateReport(
       `Audit Trail Export - ${startDate.toISOString()} to ${endDate.toISOString()}`,
       'audit',

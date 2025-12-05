@@ -89,7 +89,7 @@ export function mockLogin(
   mfaCode?: string
 ): ApiResponse<{ user: User; tokens: AuthTokens }> {
   const user = mockUsers.find((u) => u.email === email);
-  
+
   if (!user) {
     return {
       success: false,
@@ -168,7 +168,7 @@ export function mockLogin(
 // Get current user
 export function getMockCurrentUser(userId = 'advisor-001'): ApiResponse<User> {
   const user = mockUsers.find((u) => u.id === userId);
-  
+
   if (!user) {
     return {
       success: false,

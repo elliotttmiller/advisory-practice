@@ -26,9 +26,7 @@ export const passwordSchema = z
   );
 
 // Phone validation
-export const phoneSchema = z
-  .string()
-  .regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number format');
+export const phoneSchema = z.string().regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number format');
 
 // UUID validation
 export const uuidSchema = z.string().uuid('Invalid UUID format');

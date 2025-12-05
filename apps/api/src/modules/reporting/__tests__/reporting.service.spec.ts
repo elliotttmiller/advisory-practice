@@ -72,13 +72,7 @@ describe('ReportingService', () => {
       const types: Report['type'][] = ['compliance', 'performance', 'client', 'marketing', 'audit'];
 
       for (const type of types) {
-        const report = await service.generateReport(
-          `${type} Report`,
-          type,
-          'pdf',
-          {},
-          'user-123'
-        );
+        const report = await service.generateReport(`${type} Report`, type, 'pdf', {}, 'user-123');
         expect(report.type).toBe(type);
       }
     });
@@ -182,7 +176,7 @@ describe('ReportingService', () => {
     it('should generate audit trail export report', async () => {
       const startDate = new Date('2024-01-01');
       const endDate = new Date('2024-12-31');
-      
+
       const report = await service.exportAuditTrail(startDate, endDate, 'compliance-officer');
 
       expect(report.type).toBe('audit');

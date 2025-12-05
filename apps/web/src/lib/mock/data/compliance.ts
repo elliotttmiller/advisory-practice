@@ -34,10 +34,7 @@ export const mockComplianceChecks: ComplianceCheck[] = [
     targetType: 'client',
     targetId: 'client-004',
     status: 'pending',
-    findings: [
-      'KYC documentation incomplete',
-      'Identity verification pending',
-    ],
+    findings: ['KYC documentation incomplete', 'Identity verification pending'],
     createdAt: new Date('2024-11-28'),
     updatedAt: new Date('2024-11-28'),
   },
@@ -151,11 +148,11 @@ export function getMockComplianceChecksResponse(
   type?: ComplianceCheck['type']
 ): ApiResponse<ComplianceCheck[]> {
   let filteredChecks = [...mockComplianceChecks];
-  
+
   if (status) {
     filteredChecks = filteredChecks.filter((c) => c.status === status);
   }
-  
+
   if (type) {
     filteredChecks = filteredChecks.filter((c) => c.type === type);
   }
@@ -189,7 +186,7 @@ export function getMockComplianceChecksResponse(
 // Get single compliance check by ID
 export function getMockComplianceCheckById(id: string): ApiResponse<ComplianceCheck> {
   const check = mockComplianceChecks.find((c) => c.id === id);
-  
+
   if (!check) {
     return {
       success: false,

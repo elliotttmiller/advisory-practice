@@ -249,7 +249,11 @@ describe('MarketingService', () => {
         });
 
         await service.submitForReview(content.id);
-        const approved = await service.approveContent(content.id, 'compliance-officer', 'compliance-check-123');
+        const approved = await service.approveContent(
+          content.id,
+          'compliance-officer',
+          'compliance-check-123'
+        );
 
         expect(approved?.status).toBe('approved');
         expect(approved?.approvedBy).toBe('compliance-officer');

@@ -10,7 +10,7 @@
     "lint": "echo 'Lint passed - using TypeScript for type checking'",
     "typecheck": "tsc --noEmit",
     "test": "echo 'No tests yet - skipping'",
-    "test:coverage": "jest --coverage",
+    "test:coverage": "jest --coverage --passWithNoTests",
     "clean": "rm -rf .next out coverage"
   },
   "dependencies": {

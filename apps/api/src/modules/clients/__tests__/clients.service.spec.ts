@@ -146,7 +146,7 @@ describe('ClientsService', () => {
       const originalUpdatedAt = created.updatedAt;
 
       // Small delay to ensure timestamp difference
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       const updated = await service.update(created.id, {
         firstName: 'Johnny',

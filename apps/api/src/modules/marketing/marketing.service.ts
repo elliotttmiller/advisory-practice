@@ -39,7 +39,9 @@ export class MarketingService {
   private content: MarketingContent[] = [];
 
   // Lead Management
-  async createLead(data: Omit<Lead, 'id' | 'score' | 'notes' | 'createdAt' | 'updatedAt'>): Promise<Lead> {
+  async createLead(
+    data: Omit<Lead, 'id' | 'score' | 'notes' | 'createdAt' | 'updatedAt'>
+  ): Promise<Lead> {
     const lead: Lead = {
       ...data,
       id: uuidv4(),
@@ -51,7 +53,9 @@ export class MarketingService {
 
     this.leads.push(lead);
 
-    console.log(`[AUDIT] Lead created: ${lead.id} from ${lead.source} at ${new Date().toISOString()}`);
+    console.log(
+      `[AUDIT] Lead created: ${lead.id} from ${lead.source} at ${new Date().toISOString()}`
+    );
 
     return lead;
   }
@@ -140,7 +144,9 @@ export class MarketingService {
 
     this.content.push(content);
 
-    console.log(`[AUDIT] Marketing content created: ${content.id} (${content.type}) at ${new Date().toISOString()}`);
+    console.log(
+      `[AUDIT] Marketing content created: ${content.id} (${content.type}) at ${new Date().toISOString()}`
+    );
 
     return content;
   }

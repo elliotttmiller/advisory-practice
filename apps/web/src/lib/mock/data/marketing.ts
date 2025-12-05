@@ -2,8 +2,20 @@
 import type { ApiResponse, PaginationMeta } from '@financial-advisor/shared';
 
 // Marketing content types
-export type MarketingContentStatus = 'draft' | 'pending_review' | 'approved' | 'rejected' | 'published' | 'archived';
-export type MarketingContentType = 'newsletter' | 'blog_post' | 'social_media' | 'brochure' | 'email_campaign' | 'presentation';
+export type MarketingContentStatus =
+  | 'draft'
+  | 'pending_review'
+  | 'approved'
+  | 'rejected'
+  | 'published'
+  | 'archived';
+export type MarketingContentType =
+  | 'newsletter'
+  | 'blog_post'
+  | 'social_media'
+  | 'brochure'
+  | 'email_campaign'
+  | 'presentation';
 
 export interface MarketingContent {
   id: string;
@@ -33,7 +45,8 @@ export const mockMarketingContent: MarketingContent[] = [
     title: 'Q4 2024 Investment Outlook Newsletter',
     type: 'newsletter',
     status: 'pending_review',
-    content: 'As we approach the final quarter of 2024, market conditions present both opportunities and considerations for investors...',
+    content:
+      'As we approach the final quarter of 2024, market conditions present both opportunities and considerations for investors...',
     excerpt: 'Quarterly market analysis and investment strategies for Q4 2024.',
     authorId: 'advisor-001',
     authorName: 'John Doe',
@@ -48,7 +61,8 @@ export const mockMarketingContent: MarketingContent[] = [
     title: 'Understanding Tax-Efficient Investing',
     type: 'blog_post',
     status: 'approved',
-    content: 'Tax-efficient investing is a strategy that aims to minimize the tax impact of your investment portfolio...',
+    content:
+      'Tax-efficient investing is a strategy that aims to minimize the tax impact of your investment portfolio...',
     excerpt: 'Learn strategies to optimize your investments for tax efficiency.',
     authorId: 'advisor-001',
     authorName: 'John Doe',
@@ -66,7 +80,8 @@ export const mockMarketingContent: MarketingContent[] = [
     title: 'Retirement Planning Webinar Announcement',
     type: 'social_media',
     status: 'published',
-    content: '🎯 Join us for our upcoming webinar on Retirement Planning Essentials! Learn about 401(k) optimization, Social Security strategies, and more...',
+    content:
+      '🎯 Join us for our upcoming webinar on Retirement Planning Essentials! Learn about 401(k) optimization, Social Security strategies, and more...',
     excerpt: 'Announcement for December retirement planning webinar.',
     authorId: 'advisor-002',
     authorName: 'Sarah Johnson',
@@ -84,7 +99,8 @@ export const mockMarketingContent: MarketingContent[] = [
     title: 'Firm Capabilities Brochure 2025',
     type: 'brochure',
     status: 'draft',
-    content: 'Welcome to Financial Advisor Platform. For over 25 years, we have been helping individuals and families achieve their financial goals...',
+    content:
+      'Welcome to Financial Advisor Platform. For over 25 years, we have been helping individuals and families achieve their financial goals...',
     excerpt: 'Updated firm brochure showcasing services and capabilities.',
     authorId: 'advisor-001',
     authorName: 'John Doe',
@@ -99,7 +115,8 @@ export const mockMarketingContent: MarketingContent[] = [
     title: 'Year-End Financial Planning Checklist',
     type: 'email_campaign',
     status: 'approved',
-    content: 'Dear Valued Client, As 2024 draws to a close, here are important financial planning items to consider...',
+    content:
+      'Dear Valued Client, As 2024 draws to a close, here are important financial planning items to consider...',
     excerpt: 'Annual checklist for clients to review before year-end.',
     authorId: 'advisor-002',
     authorName: 'Sarah Johnson',
@@ -123,7 +140,8 @@ export const mockMarketingContent: MarketingContent[] = [
     authorName: 'John Doe',
     reviewerId: 'compliance-001',
     reviewerName: 'Jane Smith',
-    reviewNotes: 'Performance comparisons need additional context and disclosures. Please revise slides 8-12.',
+    reviewNotes:
+      'Performance comparisons need additional context and disclosures. Please revise slides 8-12.',
     complianceChecks: ['compliance-004'],
     tags: ['education', 'volatility', 'market-conditions'],
     targetAudience: 'All Clients',
@@ -153,7 +171,8 @@ export const mockMarketingContent: MarketingContent[] = [
     title: 'Estate Planning Essentials Blog Post',
     type: 'blog_post',
     status: 'pending_review',
-    content: 'Estate planning is one of the most important financial decisions you can make for your family...',
+    content:
+      'Estate planning is one of the most important financial decisions you can make for your family...',
     excerpt: 'Comprehensive guide to estate planning fundamentals.',
     authorId: 'advisor-001',
     authorName: 'John Doe',
@@ -261,11 +280,11 @@ export function getMockMarketingContentResponse(
   type?: MarketingContentType
 ): ApiResponse<MarketingContent[]> {
   let filteredContent = [...mockMarketingContent];
-  
+
   if (status) {
     filteredContent = filteredContent.filter((c) => c.status === status);
   }
-  
+
   if (type) {
     filteredContent = filteredContent.filter((c) => c.type === type);
   }
@@ -303,7 +322,7 @@ export function getMockLeadsResponse(
   status?: MarketingLead['status']
 ): ApiResponse<MarketingLead[]> {
   let filteredLeads = [...mockMarketingLeads];
-  
+
   if (status) {
     filteredLeads = filteredLeads.filter((l) => l.status === status);
   }
@@ -337,7 +356,7 @@ export function getMockLeadsResponse(
 // Get single marketing content by ID
 export function getMockMarketingContentById(id: string): ApiResponse<MarketingContent> {
   const content = mockMarketingContent.find((c) => c.id === id);
-  
+
   if (!content) {
     return {
       success: false,
