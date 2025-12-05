@@ -46,6 +46,13 @@ module.exports = {
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        React: 'readonly',
+        JSX: 'readonly',
       },
       rules: {
         'no-unused-vars': 'off', // TypeScript handles this
