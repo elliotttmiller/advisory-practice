@@ -5,12 +5,22 @@ import { isMockModeEnabled, mockApiClient } from './mock/mock-api';
 // API base URL configuration
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 
+// HTTP method type
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
 // Request options interface
 interface ApiRequestOptions {
-  method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+  method?: HttpMethod;
   body?: unknown;
   params?: Record<string, string | number | undefined>;
   headers?: Record<string, string>;
+}
+
+// Mock options interface for passing to mock client
+interface MockRequestOptions {
+  method: HttpMethod;
+  body?: unknown;
+  params?: Record<string, string | number | undefined>;
 }
 
 // Build query string from params
@@ -47,7 +57,7 @@ class ApiClient {
 
     // Use mock API if mock mode is enabled
     if (isMockModeEnabled()) {
-      const mockOptions: { method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'; body?: unknown; params?: Record<string, string | number | undefined> } = { method };
+      const mockOptions: MockRequestOptions = { method };
       if (body !== undefined) {
         mockOptions.body = body;
       }

@@ -7,11 +7,6 @@ import * as mockData from './data';
 
 // Check if mock mode is enabled
 export function isMockModeEnabled(): boolean {
-  if (typeof window === 'undefined') {
-    // Server-side: check process.env
-    return process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
-  }
-  // Client-side: check env variable
   return process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
 }
 

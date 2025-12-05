@@ -394,9 +394,9 @@ export function formatCurrency(amount: number): string {
 
 // Format percentage helper
 export function formatPercentage(value: number, includeSign = false): string {
-  const formatted = `${Math.abs(value).toFixed(1)}%`;
+  const absValue = Math.abs(value).toFixed(1);
   if (includeSign && value !== 0) {
-    return value > 0 ? `+${formatted}` : `-${formatted}`;
+    return value > 0 ? `+${absValue}%` : `-${absValue}%`;
   }
-  return formatted;
+  return `${absValue}%`;
 }
