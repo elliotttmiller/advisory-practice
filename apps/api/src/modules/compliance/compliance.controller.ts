@@ -21,12 +21,27 @@ class ReviewCheckDto {
 export class ComplianceController {
   constructor(private readonly complianceService: ComplianceService) {}
 
+  @Get('stats')
+  @ApiOperation({ summary: 'Get compliance statistics' })
+  @ApiResponse({ status: 200, description: 'Compliance statistics for dashboard' })
+  async getStats() {
+    return this.complianceService.getComplianceStats();
+  }
+
   @Get('checks')
   @ApiOperation({ summary: 'Get all compliance checks' })
   @ApiQuery({ name: 'status', required: false, description: 'Filter by status' })
   @ApiResponse({ status: 200, description: 'List of compliance checks' })
   async findAllChecks(@Query('status') status?: string): Promise<ComplianceCheck[]> {
     return this.complianceService.findAllChecks(status);
+  }
+
+  @Get('checks/:id')
+  @ApiOperation({ summary: 'Get compliance check by ID' })
+  @ApiResponse({ status: 200, description: 'Compliance check details' })
+  @ApiResponse({ status: 404, description: 'Check not found' })
+  async findCheckById(@Param('id') id: string): Promise<ComplianceCheck | null> {
+    return this.complianceService.findCheckById(id);
   }
 
   @Post('validate')
