@@ -1,6 +1,3 @@
-
-### 💎 Responsive Website Design
-
 - Responsive Financial Advisory Practice Website Design Using HTML CSS & JavaScript
 - Contains CSS & ScrollReveal animations.
 - Developed first with the Mobile First methodology, then for desktop.
