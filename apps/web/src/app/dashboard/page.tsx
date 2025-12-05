@@ -198,10 +198,10 @@ export default function DashboardPage() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-8" role="main" aria-labelledby="dashboard-heading">
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-secondary-900">Dashboard Overview</h1>
-            <p className="text-secondary-600 mt-1">Welcome back! Here&apos;s what&apos;s happening with your practice.</p>
+            <h1 id="dashboard-heading" className="text-2xl font-bold text-secondary-900">Dashboard Overview</h1>
+            <p className="text-secondary-600 mt-1" aria-describedby="dashboard-heading">Welcome back! Here&apos;s what&apos;s happening with your practice.</p>
           </div>
 
           {/* Compliance Alerts */}

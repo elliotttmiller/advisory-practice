@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mfaCode, setMfaCode] = useState('');
@@ -28,8 +30,8 @@ export default function LoginPage() {
         throw new Error('Invalid credentials');
       }
 
-      // Redirect to dashboard on success
-      window.location.href = '/dashboard';
+      // Redirect to dashboard on success using Next.js router
+      router.push('/dashboard');
     } catch {
       setError('Invalid email or password. Please try again.');
     } finally {
