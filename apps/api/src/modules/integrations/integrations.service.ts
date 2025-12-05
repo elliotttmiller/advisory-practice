@@ -393,10 +393,14 @@ export class IntegrationsService {
   ): Promise<WebhookEvent> {
     const integration = await this.getIntegrationById(integrationId);
 
+    if (!integration) {
+      throw new Error(`Integration ${integrationId} not found`);
+    }
+
     const event: WebhookEvent = {
       id: uuidv4(),
       integrationId,
-      provider: integration?.provider || ('UNKNOWN' as IntegrationProvider),
+      provider: integration.provider,
       eventType,
       payload,
       status: 'pending',

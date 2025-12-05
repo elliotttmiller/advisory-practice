@@ -124,8 +124,7 @@ export default function MessagesPage() {
     if (!newMessage.trim()) {
       return;
     }
-    // In production, this would send the message to the API
-    // Message sent: newMessage
+    // TODO: Send message to API - for now, just clear the input
     setNewMessage('');
   };
 

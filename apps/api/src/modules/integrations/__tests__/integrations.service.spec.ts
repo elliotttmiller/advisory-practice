@@ -140,6 +140,12 @@ describe('IntegrationsService', () => {
         expect(['pending', 'processed']).toContain(event.status);
       }
     });
+
+    it('should throw error for non-existent integration', async () => {
+      await expect(
+        service.handleWebhook('non-existent-id', 'test.event', { data: 'test' })
+      ).rejects.toThrow('Integration non-existent-id not found');
+    });
   });
 
   describe('getWebhookEvents', () => {

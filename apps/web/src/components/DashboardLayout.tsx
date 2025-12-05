@@ -136,7 +136,7 @@ const navigationItems = [
 export default function DashboardLayout({
   children,
   userRole = 'advisor',
-  pendingReviews = 12,
+  pendingReviews = 0,
 }: DashboardLayoutProps) {
   const pathname = usePathname();
 
