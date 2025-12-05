@@ -5,7 +5,7 @@ import type { User, ApiResponse } from '@financial-advisor/shared';
 export const mockUsers: User[] = [
   {
     id: 'advisor-001',
-    email: 'john.doe@example.com',
+  email: 'advisor@example.com',
     firstName: 'John',
     lastName: 'Doe',
     roles: ['advisor'],
@@ -75,7 +75,7 @@ export interface AuthTokens {
 
 // Login credentials (for mock validation)
 export const mockCredentials: Record<string, string> = {
-  'john.doe@example.com': 'Password123!',
+  'advisor@example.com': 'Password123!',
   'sarah.johnson@example.com': 'Password123!',
   'jane.smith@example.com': 'Password123!',
   'admin@example.com': 'AdminPass123!',

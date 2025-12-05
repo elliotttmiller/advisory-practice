@@ -1,191 +1,172 @@
-# REVISED PROJECT REQUEST DOCUMENT: HYBRID ECOSYSTEM OPTIMIZATION
-## Developer Specialist Execution Authority
+Of course. This is the final, logical step: creating a single, master document that encompasses the entire frontend scope for both user roles. This provides the developer with a holistic view of the project, ensuring consistency in design, components, and implementation across the whole platform.
 
----
+The following document preserves your entire previous request for the client portal and seamlessly integrates the new workstream for the advisor portal.
 
-## EXECUTIVE SUMMARY
-This document outlines a strategic realignment of the `advisory-practice` platform development. The approach shifts from building a general-purpose TAMP to optimizing the platform as a **comprehensive practice management hub** that *integrates with* leading industry TAMP providers (like LPL's offerings) and other best-of-breed third-party services. The primary objective is to leverage the existing, robust codebase (`apps/web`, `apps/api`, `packages/shared`) as the strategic integration hub, focusing development efforts on building the unique, differentiating features that provide a unified, branded experience while integrating with specialized external services where building in-house offers no advantage.
+Project Request Document: Comprehensive Platform Frontend - Client & Advisor Portals
 
----
+Version: 4.0 (Master Document)
 
-## I. DEVELOPMENT FOCUS: HYBRID ECOSYSTEM STRATEGY
+Date: 2025-12-05
 
-### A. Internal Development Priorities (Build)
-**Objective**: Complete and optimize the core platform components that provide unique value, ensure a unified user experience, and manage the integration ecosystem.
+Project Owner: [Your Name/Project Lead]
 
-**1. Core Platform Services (`apps/api`)**
+1. Executive Summary
 
-- **Authentication & Authorization Service**:
-  - **Task**: Complete the OAuth 2.0 PKCE flow, MFA enforcement, session management, and RBAC system as defined in the knowledge base blueprint. Integrate with an external Identity Provider (IDP) like Auth0 for core authentication, but manage internal permissions and user lifecycle orchestration.
-  - **Deliverable**: Fully functional authentication service with secure session management and role-based access control for Advisor, Client, and Compliance Officer roles.
+This document outlines the complete scope of work for the entire platform frontend experience, covering both the Client Portal and the Advisor Portal. This master request merges all related UI/UX tasks into a single, cohesive project. The initiative covers three primary areas:
 
-- **Client Management Service**:
-  - **Task**: Implement the complete client profile management, including core data (name, contact, risk tolerance), advisor assignment, and integration mapping (external IDs for TAMP, CRM). Build the client onboarding workflow UI in `apps/web`.
-  - **Deliverable**: CRUD operations for client profiles, secure data storage, and synchronization points for external service IDs.
+Unified Authentication: Building the client-first sign-in gateway, a dedicated advisor sign-in page, and the "Forgot Password" workflow.
 
-- **Compliance Engine Service**:
-  - **Task**: Finalize the implementation of SEC Marketing Rule 206(4)-1 and FINRA Rule 2210 validation logic, approval workflows, and audit trail generation as defined in the blueprint. This handles internal compliance tasks (marketing content, client communications) and potentially oversees data from integrated services.
-  - **Deliverable**: Automated compliance checking for internal content, approval workflows, and comprehensive audit logging.
+Client Portal Implementation: Building all pages, components, and features of the secure client portal from the ground up.
 
-- **Reporting & Analytics Service**:
-  - **Task**: Develop the service to aggregate data from internal platform activities (user actions, compliance events) and *integrated* external services (portfolio performance from TAMP, AUM from CRM). Create APIs for unified reporting.
-  - **Deliverable**: Aggregated data models and API endpoints for advisor and firm-level reporting dashboards.
+Advisor Portal Audit & Implementation: Auditing the existing advisor-facing codebase and then fully building out and wiring up all pages, components, and features to ensure a polished, performant, and fully functional experience.
 
-- **Integration Orchestration Service**:
-  - **Task**: Build the core framework within `apps/api` to connect to external APIs (TAMP, CRM, Market Data). Implement data normalization, secure credential storage (HashiCorp Vault or similar), webhook handling, and API rate limiting/fallbacks.
-  - **Deliverable**: Reusable adapter patterns and services for connecting to external providers.
+Development will follow a frontend-first methodology against a mocked API contract for both portals to ensure rapid development and validation before final backend integration.
 
-**2. Frontend Applications (`apps/web`, `apps/admin`)**
+2. Core Objective
 
-- **Advisor Dashboard (UI)**:
-  - **Task**: Create the unified advisor interface. Pull together client lists (from internal service), basic portfolio summaries (fetched from TAMP via internal API), compliance tasks (from internal engine), marketing leads (from CRM via internal API), and communication history (internal). Focus on advisor workflow efficiency.
-  - **Deliverable**: A single-page application dashboard providing a holistic view of the advisor's practice.
+To design, develop, and fully implement a seamless, secure, and intuitive end-to-end user journey for both clients and advisors. This starts from the moment a user accesses the platform's sign-in gateways and extends through every interaction within their respective secure portals.
 
-- **Client Portal (UI)**:
-  - **Task**: Create the branded client interface. Display their profile (internal), portfolio performance summary (fetched from TAMP via internal API), goal progress (if integrated with planning tool), communication history (internal), and documents (internal + synced). Prioritize client experience and understanding.
-  - **Deliverable**: A secure, branded portal for clients to view their information and interact with their advisor.
+3. Scope of Work: Key Epics & Features
 
-- **Admin Dashboard (UI)**:
-  - **Task**: Complete the UI for compliance officers and administrators. Manage users (internal), review marketing content (using internal engine), monitor system events (audit logs from internal service), and oversee client management processes. This is the internal operations hub.
-  - **Deliverable**: A comprehensive administrative interface for platform oversight and compliance management.
+This project is divided into two primary workstreams, which can be developed in parallel against the mock API.
 
-- **Marketing & Lead Capture (UI)**:
-  - **Task**: Refine the public-facing website, landing pages, and lead capture forms. Implement the workflow for new lead data (validated by internal rules) to be passed to the CRM (via internal integration service). Ensure all marketing content flows through the internal compliance engine.
-  - **Deliverable**: A lead generation and marketing compliance workflow integrated into the platform.
+Workstream A: Client Experience
 
-- **Communication Center (UI)**:
-  - **Task**: Build the interface for advisors and clients to communicate securely within the platform (messages, potentially linking to external tools). Store communication history internally and link to client profiles.
-  - **Deliverable**: A central hub for advisor-client communication managed within the platform.
+Epic 1: Authentication, Access & Recovery
 
-**3. Internal Data Management & Infrastructure**
+Goal: Implement the primary entry point for all users, prioritizing the client experience.
 
-- **Document Management (Internal Storage)**:
-  - **Task**: Complete the UI and backend logic for managing internal documents (notes, custom agreements) stored securely (MinIO/S3) with SEC Rule 17a-4(f) compliance. Integrate with external e-signature tools.
-  - **Deliverable**: A secure, compliant document vault accessible within the advisor and client portals.
+User Flows & Features:
 
-### B. Third-Party Integration Priorities (Buy/Integrate)
+Client-First Sign-In:
 
-**Objective**: Strategically integrate with 5-7 key third-party providers for specialized financial services.
+The main "Sign In" button on the website navigates to a dedicated Client Sign-In Page (/login/client).
 
-- **Primary TAMP Provider Integration**:
-  - **Provider**: LPL (MWP, OMP, GWP, MS, SAM), Envestnet, or SEI.
-  - **Scope**: Integrate portfolio data (holdings, performance, allocation), model assignment, and rebalancing execution/status into the advisor and client dashboards via the internal API.
+This page contains a simple form (Email, Password) and a subtle text link: "Are you an advisor? Sign in here" which navigates to /login/advisor.
 
-- **Primary CRM Integration**:
-  - **Provider**: Redtail CRM, Wealthbox.
-  - **Scope**: Sync client contact information, interaction history, tasks, and pipeline data. Use this for lead management and advisor workflow.
+Advisor Sign-In:
 
-- **Market Data Integration**:
-  - **Provider**: Morningstar, Refinitiv.
-  - **Scope**: Fetch real-time and historical pricing, fund/ETF data for display in advisor/client UIs and internal calculations.
+The /login/advisor page provides a dedicated, consistently-styled login form for advisors.
 
-- **Document Generation & e-Signature Integration**:
-  - **Provider**: DocuSign, Adobe Sign.
-  - **Scope**: Trigger document generation/signing from workflows, link signed documents back to client profiles.
+"Forgot Password" Workflow:
 
-- **Identity Provider (IDP) Integration**:
-  - **Provider**: Auth0, Okta.
-  - **Scope**: Handle core user authentication, SSO, MFA. The internal service manages authorization and user lifecycle *within* the platform.
+A "Forgot Password?" link is present on both the client and advisor login pages, leading to a secure password reset flow.
 
----
+Out of Scope: User "Sign Up" / registration flows are explicitly excluded.
 
-## II. SCOPE OF WORK: KEY EPICS & FEATURES
+Epic 2: Client Portal - Main Dashboard / Overview
 
-### Workstream I: Complete Internal Platform Core (`apps/api`, `packages/shared`)
+Goal: Provide the client with an immediate, high-level summary of their financial picture upon login.
 
-**Epic 1: Core Services Completion**
-- **Goal**: Finalize the internal services identified as "Build".
-- **Tasks**:
-  - Complete Authentication Service implementation.
-  - Complete Client Management Service implementation.
-  - Complete Compliance Engine implementation (validation, workflows, audit trails).
-  - Build Reporting & Analytics aggregation service.
-  - Build Integration Orchestration framework.
-- **Deliverable**: All internal services fully functional and tested.
+UI Components: Portfolio Summary Card, Allocation Overview Chart, Recent Activity Feed.
 
-### Workstream II: Frontend Implementation (`apps/web`, `apps/admin`)
+Epic 3: Client Portal - Detailed Portfolio View
 
-**Epic 2: Advisor Portal UI**
-- **Goal**: Build the unified advisor dashboard.
-- **Tasks**:
-  - Implement Advisor Dashboard layout and core widgets (AUM, activity feed, tasks).
-  - Implement Client List Page with search/filter.
-  - Implement Client Detail Page with tabs (Overview, Portfolio, Documents, Notes).
-  - Implement Compliance Center UI (Review queue, detail view).
-- **Deliverable**: Fully functional Advisor Portal with mock data integration for external services initially.
+Goal: Allow clients to perform a deep-dive into their investment accounts and holdings.
 
-**Epic 3: Client Portal UI**
-- **Goal**: Build the branded client portal.
-- **Tasks**:
-  - Implement Client Dashboard layout with portfolio summary.
-  - Implement Client Profile Management.
-  - Implement Document Vault UI.
-  - Implement Communication Center UI.
-- **Deliverable**: Fully functional Client Portal with mock data integration for external services initially.
+UI Components: Accounts List/Selector, Holdings Data Table, Interactive Performance Chart.
 
-**Epic 4: Admin Portal UI**
-- **Goal**: Complete the administrative dashboard.
-- **Tasks**:
-  - Implement User Management (Advisor list, add/edit).
-  - Implement Compliance Oversight (Review queue, audit logs).
-- **Deliverable**: Fully functional Admin Portal.
+Epic 4: Client Portal - Document Center
 
-### Workstream III: Integration Framework & Mocking
+Goal: Create a secure, organized repository for all client-related documents.
 
-**Epic 5: API Contract Definition & Mocking**
-- **Goal**: Define the data contracts for integration and implement mocking for development.
-- **Tasks**:
-  - Define TypeScript interfaces for data models exchanged with TAMP, CRM, Market Data providers.
-  - Implement MSW (Mock Service Worker) to simulate external API responses using these contracts.
-  - Ensure `apps/web` and `apps/admin` consume data from the mock service during `dev:mock` mode.
-- **Deliverable**: Clear API contracts and a fully functional mock environment for rapid UI development.
+UI Components: Folder/file navigation, searchable document list, secure viewer/downloader.
 
-**Epic 6: Initial External Integrations**
-- **Goal**: Integrate with 1-2 key external services (e.g., TAMP, CRM) using the internal orchestration service.
-- **Tasks**:
-  - Configure API credentials for target providers securely.
-  - Implement adapter logic in `apps/api` to fetch/sync data from providers.
-  - Update `apps/web` and `apps/admin` to consume real data from the internal API for these services.
-- **Deliverable**: Live data from integrated external services displayed in the frontend applications.
+Epic 5: Client Portal - Secure Communication Hub
 
----
+Goal: Facilitate secure messaging between the client and their advisor.
 
-## III. OUT OF SCOPE
+UI Components: A simple, threaded message interface.
 
-- **Building a TAMP**: No investment in core investment management, rebalancing, or custodial functions internally.
-- **Building a CRM**: No development of client relationship management features beyond internal mappings and sync.
-- **Building a Financial Planning Tool**: No development of complex financial modeling software.
-- **Building a Document Generation Engine**: No development of complex document templates or e-signature logic beyond API integration.
-- **Full Integration Implementation**: This PR focuses on the internal platform and the framework for integration. Full integration with all providers will be phased in later.
+Workstream B: Advisor Experience
 
----
+Epic 6: Advisor Portal - Code Audit & Foundation
 
-## IV. ACCEPTANCE CRITERIA & SUCCESS METRICS
+Goal: Review the existing advisor-facing codebase to identify reusable components and establish a clean foundation for new feature development.
 
-- **Final Deliverable**: A functional, integrated platform where core features (authentication, client management, compliance, basic reporting, communication) are built internally, and data from key external services (TAMP, CRM) is displayed in the advisor and client portals.
-- **Success Metric**: The `dev:mock` mode provides a complete, interactive experience for all defined UI features using mock data.
-- **Success Metric**: The internal API can successfully connect to and retrieve data from at least one external provider (e.g., TAMP).
-- **Success Metric**: The advisor and client portals display a unified view combining internal data and data from integrated external services.
-- **Success Metric**: The API Contract for core external integrations is documented and committed.
-- **Acceptance Criterion**: A stakeholder can log in (advisor or client), navigate the relevant portal, view client/portfolio data (combining internal and mock/real external data), and perform basic actions (e.g., view compliance tasks, communicate with advisor) without critical errors.
+Tasks: Audit existing pages, components, and state management. Refactor where necessary to align with the latest architectural standards defined in this PRD.
 
----
+Epic 7: Advisor Portal - Main Dashboard
 
-## V. DEVELOPER SPECIALIST AUTHORITY & CONSTRAINTS
+Goal: Create the advisor's "single pane of glass" to manage their practice efficiently.
 
-### A. Developer Specialist Authority
-- **Full authority** over the implementation of internal platform features defined in the "Build" section.
-- **Authority** to select specific UI libraries for data visualization within the existing Next.js/Tailwind stack.
-- **Authority** to define the structure and implementation details of the integration adapters.
-- **Authority** to refine the API contracts based on actual external provider APIs encountered during integration.
+UI Components:
 
-### B. Non-Negotiable Constraints
-- **Compliance Adherence**: All internal features must strictly support and enforce the underlying regulatory compliance requirements (SEC, FINRA, GLBA).
-- **Security Standards**: All internal code and integrations must meet SOC 2 Type II standards as defined in the original blueprint.
-- **Architecture Adherence**: Must build upon the existing monorepo structure (`apps/`, `packages/`) and technology stack (Next.js, NestJS, TypeScript, Tailwind CSS).
-- **Integration Strategy**: Focus must remain on the hybrid approach, building core platform features while integrating with external services for specialized functions. Avoid building full-featured replacements for established providers within the scope of this PR.
+Practice Summary: Cards for total AUM, client count, and aggregate performance.
 
----
+Recent Activity Feed: A log of recent client activities, trades, or communications.
 
-## CONCLUSION
-This PRD refocuses development efforts on leveraging the existing, strong foundation of the `advisory-practice` platform. It prioritizes completing the internal platform components that provide unique value and control while strategically integrating with best-in-class external services. This hybrid approach is designed to deliver maximum value to advisors and clients efficiently and scalably.
+Compliance Queue: A widget showing pending tasks (e.g., marketing reviews).
+
+Epic 8: Advisor Portal - Client Management
+
+Goal: Build the complete interface for viewing and managing all clients.
+
+UI Components:
+
+Client List Page: A robust, searchable, and filterable data table of all clients.
+
+Client Detail Page: A comprehensive hub with tabs for Overview, Portfolio, Documents, and Notes/Activity.
+
+Epic 9: Advisor Portal - Compliance Center
+
+Goal: Provide a dedicated interface for compliance officers and advisors to manage regulatory tasks.
+
+UI Components:
+
+Review Queue Dashboard: A master list of all items pending review.
+
+Review Detail Page: An interface to view content, add comments, and approve/reject.
+
+4. Technical Requirements & API Contract
+
+Frontend-First with Mocking: A mock service layer (MSW) must be used to simulate all API responses for both portals.
+
+Technology Stack: Adhere to the existing monorepo stack (Next.js, Tailwind CSS, React Query/SWR, Zustand).
+
+Component-Driven: All new and refactored UI elements must be reusable, placed in packages/ui, and documented in Storybook.
+
+API Contract Details (Expanded):
+
+Authentication: POST /api/auth/{client|advisor}/{login|forgot-password|reset-password}
+
+Client Data: GET /api/client/... (Portfolio, Documents, Messages)
+
+Advisor Data: GET /api/advisor/... (Clients, AUM, Compliance Tasks, etc.)
+(A detailed TypeScript interface file for all contracts is a key deliverable.)
+
+5. Non-Functional Requirements
+
+Design: Strictly adhere to the company's branding and Figma design system across both portals.
+
+Responsiveness: All interfaces must be fully responsive from mobile to desktop.
+
+Performance: Achieve "Good" ratings on Core Web Vitals for all key pages.
+
+Accessibility: Meet WCAG 2.1 Level AA standards.
+
+6. Deliverables
+
+A finalized and committed API Contract for all client and advisor features.
+
+A fully interactive Client Portal application running against the mock service layer.
+
+A fully audited, refactored, and interactive Advisor Portal application running against the mock service layer.
+
+Production-ready Client and Advisor Portals fully wired to live backend APIs.
+
+A comprehensive, documented Storybook in packages/ui for all shared components.
+
+7. Acceptance Criteria
+
+Login Flow: The client-first login flow with a link to the advisor page is implemented and functional.
+
+Password Reset: The "Forgot Password" workflow is functional for both roles.
+
+Client Portal Functionality: A client can log in and fully navigate and interact with all features of their portal using mock data.
+
+Advisor Portal Functionality: An advisor can log in and fully navigate and interact with their dashboard, client list, and compliance center using mock data.
+
+Responsiveness & Design: Both portals are pixel-perfect according to designs and work flawlessly on mobile and desktop.
+
+Final Wiring: The final application successfully fetches and displays live data from the backend across both portals, ensuring smooth and perfect functionality.
