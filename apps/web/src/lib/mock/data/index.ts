@@ -5,3 +5,4 @@ export * from './compliance';
 export * from './marketing';
 export * from './reports';
 export * from './auth';
+export * from './portfolio';

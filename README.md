@@ -1,12 +1,13 @@
 # Financial Advisor MVP Platform
 
 Enterprise-grade financial advisory practice platform with FINRA/SEC regulatory compliance and SOC 2
-Type II security standards.
+Type II security standards. Designed as a Turnkey Asset Management Platform (TAMP) for financial advisory practices.
 
 ## 🚀 Overview
 
 This platform provides a complete solution for financial advisory practices, featuring:
 
+- **Portfolio Management** - Model portfolio creation, client assignment, monitoring, and rebalancing
 - **Client Relationship Management** - Comprehensive client data management with KYC/AML compliance
 - **Document Management** - SEC Rule 17a-4(f) compliant document storage with immutable audit trails
 - **Compliance Engine** - Automated compliance checking for SEC Marketing Rule 206(4)-1 and FINRA Rule

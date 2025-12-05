@@ -78,6 +78,10 @@ class MockApiClient {
       case 'reports':
       case 'dashboard':
         return this.handleReportsRequest(normalizedEndpoint, params) as ApiResponse<T>;
+      case 'portfolios':
+      case 'models':
+      case 'rebalancing':
+        return this.handlePortfolioRequest(resource, id, subResource, method, params) as ApiResponse<T>;
       default:
         return {
           success: false,
@@ -294,6 +298,60 @@ class MockApiClient {
 
     // Default to dashboard metrics
     return mockData.getMockDashboardMetricsResponse();
+  }
+
+  // Portfolio handlers (TAMP functionality)
+  private handlePortfolioRequest(
+    resource: string,
+    id?: string,
+    subResource?: string,
+    method?: HttpMethod,
+    params?: Record<string, string | number | undefined>
+  ): ApiResponse<unknown> {
+    // Model portfolios
+    if (resource === 'models') {
+      if (method === 'GET') {
+        if (id) {
+          return mockData.getMockModelPortfolioById(id);
+        }
+        const page = Number(params?.page) || 1;
+        const pageSize = Number(params?.pageSize) || 10;
+        const riskLevel = params?.riskLevel as Parameters<typeof mockData.getMockModelPortfoliosResponse>[2];
+        return mockData.getMockModelPortfoliosResponse(page, pageSize, riskLevel);
+      }
+    }
+
+    // Client portfolios
+    if (resource === 'portfolios') {
+      if (subResource === 'summary' || id === 'summary') {
+        return mockData.getMockPortfolioSummaryResponse();
+      }
+
+      if (method === 'GET') {
+        if (id && id !== 'summary') {
+          return mockData.getMockClientPortfolioById(id);
+        }
+        const page = Number(params?.page) || 1;
+        const pageSize = Number(params?.pageSize) || 10;
+        const clientId = params?.clientId as string | undefined;
+        const driftStatus = params?.driftStatus as Parameters<typeof mockData.getMockClientPortfoliosResponse>[3];
+        return mockData.getMockClientPortfoliosResponse(page, pageSize, clientId, driftStatus);
+      }
+    }
+
+    // Rebalancing
+    if (resource === 'rebalancing') {
+      return mockData.getMockRebalancingBatchesResponse();
+    }
+
+    return {
+      success: true,
+      data: { message: 'Portfolio operation successful in mock mode' },
+      metadata: {
+        timestamp: new Date().toISOString(),
+        requestId: `mock-${Date.now()}`,
+      },
+    };
   }
 
   // Convenience methods
