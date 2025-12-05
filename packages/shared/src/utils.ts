@@ -4,14 +4,29 @@ import { PaginationMeta, PaginationParams } from './types';
 import { DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE } from './constants';
 
 /**
- * Generate a UUID v4
+ * Generate a UUID v4 using crypto API for security
  */
 export function generateId(): string {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0;
-    const v = c === 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
+  // Use crypto.randomUUID() for cryptographically secure UUID generation
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback for environments without crypto.randomUUID (will be rare)
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  // Set version (4) and variant (10) bits
+  const byte6 = bytes[6];
+  const byte8 = bytes[8];
+  if (byte6 !== undefined && byte8 !== undefined) {
+    bytes[6] = (byte6 & 0x0f) | 0x40; // Version 4
+    bytes[8] = (byte8 & 0x3f) | 0x80; // Variant 10
+  }
+  return Array.from(bytes)
+    .map((b, i) => {
+      const hex = b.toString(16).padStart(2, '0');
+      return [4, 6, 8, 10].includes(i) ? `-${hex}` : hex;
+    })
+    .join('');
 }
 
 /**

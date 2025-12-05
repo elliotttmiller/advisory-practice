@@ -15,12 +15,21 @@ export interface Client {
   updatedAt: Date;
 }
 
+/**
+ * Client relationship management service.
+ *
+ * NOTE: This service currently uses an in-memory store for development.
+ * Production deployment requires:
+ * 1. Database integration via Prisma/TypeORM
+ * 2. Proper transaction handling
+ * 3. Row-level security implementation
+ */
 @Injectable()
 export class ClientsService {
   private clients: Client[] = [];
 
   async findAll(): Promise<Client[]> {
-    // TODO: Implement actual database query
+    // Production: return this.prisma.client.findMany({ where: { status: { not: 'inactive' } } });
     return this.clients;
   }
 

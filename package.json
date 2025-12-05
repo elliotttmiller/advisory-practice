@@ -21,7 +21,7 @@
     "db:migrate": "turbo run db:migrate",
     "db:seed": "turbo run db:seed",
     "security:audit": "npm audit --audit-level=moderate",
-    "compliance:check": "turbo run compliance:check"
+    "compliance:check": "node scripts/compliance/validate.js"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

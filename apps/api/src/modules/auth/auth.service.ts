@@ -16,6 +16,15 @@ export interface AuthTokens {
   expiresIn: number;
 }
 
+/**
+ * Authentication service for user validation and token management.
+ *
+ * IMPORTANT: The validateUser method contains a mock implementation for development.
+ * Before production deployment, this must be replaced with:
+ * 1. Database user lookup via Prisma/TypeORM
+ * 2. Proper password verification against stored hashes
+ * 3. Account lockout logic for brute force protection
+ */
 @Injectable()
 export class AuthService {
   private readonly SALT_ROUNDS = 12;
@@ -25,9 +34,25 @@ export class AuthService {
     private readonly configService: ConfigService
   ) {}
 
+  /**
+   * Validate user credentials.
+   *
+   * WARNING: This is a development mock implementation.
+   * Production implementation must query the user database.
+   */
   async validateUser(email: string, password: string): Promise<TokenPayload | null> {
-    // TODO: Implement actual user lookup from database
-    // This is a placeholder for development
+    // TODO: Replace with database lookup before production deployment
+    // Example production implementation:
+    // const user = await this.usersService.findByEmail(email);
+    // if (!user || !await bcrypt.compare(password, user.passwordHash)) {
+    //   return null;
+    // }
+
+    // Development mock - DO NOT use in production
+    if (this.configService.get<string>('NODE_ENV') === 'production') {
+      throw new Error('Mock authentication cannot be used in production');
+    }
+
     const mockUser = {
       id: uuidv4(),
       email: email,

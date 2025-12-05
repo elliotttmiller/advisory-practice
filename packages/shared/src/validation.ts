@@ -60,7 +60,11 @@ export const userRegistrationSchema = z.object({
 export const loginSchema = z.object({
   email: emailSchema,
   password: z.string().min(1, 'Password is required'),
-  mfaCode: z.string().length(6).optional(),
+  mfaCode: z
+    .string()
+    .length(6)
+    .regex(/^\d{6}$/, 'MFA code must be 6 numeric digits')
+    .optional(),
 });
 
 // Client profile schema

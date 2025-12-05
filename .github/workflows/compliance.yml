@@ -10,6 +10,8 @@ jobs:
   compliance-check:
     name: Regulatory Compliance Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -53,6 +55,8 @@ jobs:
   accessibility-check:
     name: Accessibility Compliance (WCAG 2.1 AA)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -79,6 +83,8 @@ jobs:
   audit-trail-validation:
     name: Audit Trail Validation
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
