@@ -43,11 +43,12 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       parser: '@typescript-eslint/parser',
-      extends: [
-        'eslint:recommended',
-      ],
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
       rules: {
-        // TypeScript specific rules will be enabled when TypeScript is installed
+        'no-unused-vars': 'off', // TypeScript handles this
       },
     },
   ],

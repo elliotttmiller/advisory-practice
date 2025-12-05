@@ -68,13 +68,19 @@ export class DocumentsService {
 
     // Documents are immutable for compliance - create new version instead of updating
     const newDocument: Document = {
-      ...existing,
+      clientId: existing.clientId,
+      name: existing.name,
+      type: existing.type,
+      classification: existing.classification,
+      mimeType: existing.mimeType,
+      size: existing.size,
+      hash: existing.hash,
+      storageKey: existing.storageKey,
+      retentionPolicy: existing.retentionPolicy,
       ...data,
       id: uuidv4(),
       version: existing.version + 1,
       createdBy: userId,
-      approvedBy: undefined,
-      approvedAt: undefined,
       createdAt: new Date(),
       updatedAt: new Date(),
     };

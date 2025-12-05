@@ -123,7 +123,7 @@ export const leadCaptureSchema = z.object({
 });
 
 // Compliance check schema
-export const complianceCheckSchema = z.object({
+export const complianceCheckInputSchema = z.object({
   type: z.enum([
     'SEC_MARKETING_206_4_1',
     'FINRA_2210',
@@ -143,5 +143,5 @@ export type ClientProfile = z.infer<typeof clientProfileSchema>;
 export type DocumentUpload = z.infer<typeof documentUploadSchema>;
 export type MarketingContent = z.infer<typeof marketingContentSchema>;
 export type LeadCapture = z.infer<typeof leadCaptureSchema>;
-export type ComplianceCheck = z.infer<typeof complianceCheckSchema>;
+export type ComplianceCheckInput = z.infer<typeof complianceCheckInputSchema>;
 export type Pagination = z.infer<typeof paginationSchema>;

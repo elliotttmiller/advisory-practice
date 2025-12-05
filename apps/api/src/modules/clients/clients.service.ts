@@ -50,17 +50,24 @@ export class ClientsService {
       return null;
     }
 
-    this.clients[index] = {
-      ...this.clients[index],
+    const existingClient = this.clients[index];
+    if (!existingClient) {
+      return null;
+    }
+
+    const updatedClient: Client = {
+      ...existingClient,
       ...data,
       id, // Ensure ID cannot be changed
       updatedAt: new Date(),
     };
 
+    this.clients[index] = updatedClient;
+
     // Log client update for compliance audit trail
     console.log(`[AUDIT] Client updated: ${id} at ${new Date().toISOString()}`);
 
-    return this.clients[index];
+    return updatedClient;
   }
 
   async delete(id: string): Promise<boolean> {
@@ -69,9 +76,14 @@ export class ClientsService {
       return false;
     }
 
+    const existingClient = this.clients[index];
+    if (!existingClient) {
+      return false;
+    }
+
     // For FINRA compliance, we soft-delete clients instead of hard delete
-    this.clients[index].status = 'inactive';
-    this.clients[index].updatedAt = new Date();
+    existingClient.status = 'inactive';
+    existingClient.updatedAt = new Date();
 
     // Log client deletion for compliance audit trail
     console.log(`[AUDIT] Client soft-deleted: ${id} at ${new Date().toISOString()}`);
