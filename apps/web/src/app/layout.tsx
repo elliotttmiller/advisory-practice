@@ -22,11 +22,7 @@ export const viewport: Viewport = {
   themeColor: '#0284c7',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="min-h-screen bg-white antialiased font-sans">{children}</body>

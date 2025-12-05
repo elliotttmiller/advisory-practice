@@ -48,7 +48,12 @@ export class ComplianceController {
   @ApiOperation({ summary: 'Validate content against compliance rules' })
   @ApiResponse({ status: 200, description: 'Compliance check result' })
   async validateContent(@Body() dto: ValidateContentDto): Promise<ComplianceCheck> {
-    return this.complianceService.validateContent(dto.type, dto.targetType, dto.targetId, dto.content);
+    return this.complianceService.validateContent(
+      dto.type,
+      dto.targetType,
+      dto.targetId,
+      dto.content
+    );
   }
 
   @Post('checks/:id/review')

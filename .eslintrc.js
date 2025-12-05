@@ -6,9 +6,7 @@ module.exports = {
     es2022: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-  ],
+  extends: ['eslint:recommended'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -18,27 +16,20 @@ module.exports = {
     'no-eval': 'error',
     'no-implied-eval': 'error',
     'no-new-func': 'error',
-    
+
     // Code quality rules
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-debugger': 'error',
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'prefer-const': 'error',
     'no-var': 'error',
-    
+
     // Best practices
-    'eqeqeq': ['error', 'always'],
-    'curly': ['error', 'all'],
+    eqeqeq: ['error', 'always'],
+    curly: ['error', 'all'],
     'no-throw-literal': 'error',
   },
-  ignorePatterns: [
-    'node_modules/',
-    'dist/',
-    '.next/',
-    'coverage/',
-    '.turbo/',
-    '*.min.js',
-  ],
+  ignorePatterns: ['node_modules/', 'dist/', '.next/', 'coverage/', '.turbo/', '*.min.js'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],

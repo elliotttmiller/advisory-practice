@@ -87,7 +87,10 @@ export function maskEmail(email: string): string {
   if (!local || !domain) {
     return '***@***.***';
   }
-  const maskedLocal = local.length > 2 ? local[0] + '*'.repeat(local.length - 2) + local.slice(-1) : '*'.repeat(local.length);
+  const maskedLocal =
+    local.length > 2
+      ? local[0] + '*'.repeat(local.length - 2) + local.slice(-1)
+      : '*'.repeat(local.length);
   return `${maskedLocal}@${domain}`;
 }
 

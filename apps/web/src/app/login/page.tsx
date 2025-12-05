@@ -146,16 +146,15 @@ export default function LoginPage() {
                 />
                 <span className="ml-2 text-sm text-secondary-600">Remember me</span>
               </label>
-              <Link href="/forgot-password" className="text-sm text-primary-600 hover:text-primary-700">
+              <Link
+                href="/forgot-password"
+                className="text-sm text-primary-600 hover:text-primary-700"
+              >
                 Forgot password?
               </Link>
             </div>
 
-            <button
-              type="submit"
-              className="btn-primary w-full py-3"
-              disabled={isLoading}
-            >
+            <button type="submit" className="btn-primary w-full py-3" disabled={isLoading}>
               {isLoading ? (
                 <span className="flex items-center justify-center">
                   <svg className="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24">
@@ -194,7 +193,10 @@ export default function LoginPage() {
           <div className="mt-6 pt-6 border-t border-secondary-200 text-center">
             <p className="text-sm text-secondary-600">
               Don&apos;t have an account?{' '}
-              <Link href="/get-started" className="text-primary-600 hover:text-primary-700 font-medium">
+              <Link
+                href="/get-started"
+                className="text-primary-600 hover:text-primary-700 font-medium"
+              >
                 Request Access
               </Link>
             </p>

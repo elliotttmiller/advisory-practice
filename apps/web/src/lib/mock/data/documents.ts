@@ -181,11 +181,11 @@ export function getMockDocumentsResponse(
   type?: Document['type']
 ): ApiResponse<Document[]> {
   let filteredDocuments = [...mockDocuments];
-  
+
   if (clientId) {
     filteredDocuments = filteredDocuments.filter((d) => d.clientId === clientId);
   }
-  
+
   if (type) {
     filteredDocuments = filteredDocuments.filter((d) => d.type === type);
   }
@@ -219,7 +219,7 @@ export function getMockDocumentsResponse(
 // Get single document by ID
 export function getMockDocumentById(id: string): ApiResponse<Document> {
   const document = mockDocuments.find((d) => d.id === id);
-  
+
   if (!document) {
     return {
       success: false,

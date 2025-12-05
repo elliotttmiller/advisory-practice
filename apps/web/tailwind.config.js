@@ -53,9 +53,9 @@ module.exports = {
         display: ['Inter', 'system-ui', 'sans-serif'],
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
       },
       borderRadius: {
         '4xl': '2rem',

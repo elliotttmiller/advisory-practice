@@ -28,14 +28,14 @@ function buildQueryString(params?: Record<string, string | number | undefined>):
   if (!params) {
     return '';
   }
-  
+
   const searchParams = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
       searchParams.append(key, String(value));
     }
   });
-  
+
   const queryString = searchParams.toString();
   return queryString ? `?${queryString}` : '';
 }
@@ -49,10 +49,7 @@ class ApiClient {
   }
 
   // Generic request handler
-  async request<T>(
-    endpoint: string,
-    options: ApiRequestOptions = {}
-  ): Promise<ApiResponse<T>> {
+  async request<T>(endpoint: string, options: ApiRequestOptions = {}): Promise<ApiResponse<T>> {
     const { method = 'GET', body, params, headers = {} } = options;
 
     // Use mock API if mock mode is enabled
@@ -126,7 +123,10 @@ class ApiClient {
   }
 
   // Convenience methods
-  async get<T>(endpoint: string, params?: Record<string, string | number | undefined>): Promise<ApiResponse<T>> {
+  async get<T>(
+    endpoint: string,
+    params?: Record<string, string | number | undefined>
+  ): Promise<ApiResponse<T>> {
     const options: ApiRequestOptions = { method: 'GET' };
     if (params !== undefined) {
       options.params = params;

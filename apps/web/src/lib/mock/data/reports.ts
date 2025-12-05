@@ -356,7 +356,7 @@ export function getMockActivityLogResponse(limit = 10): ApiResponse<ActivityLogE
   const sortedLog = [...mockActivityLog].sort(
     (a, b) => b.timestamp.getTime() - a.timestamp.getTime()
   );
-  
+
   return {
     success: true,
     data: sortedLog.slice(0, limit),

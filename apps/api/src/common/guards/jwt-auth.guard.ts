@@ -14,11 +14,11 @@ import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 
 /**
  * JWT Authentication Guard
- * 
+ *
  * This guard implements JWT-based authentication following FINRA requirements
  * for secure access control. It validates JWT tokens and enforces role-based
  * access control (RBAC).
- * 
+ *
  * Features:
  * - Token validation with expiry checking
  * - Role-based authorization

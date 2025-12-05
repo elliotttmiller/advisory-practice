@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  
+
   // Security headers for FINRA/SEC compliance
   async headers() {
     return [

@@ -1,17 +1,19 @@
 # Financial Advisor MVP Platform
 
 Enterprise-grade financial advisory practice platform with FINRA/SEC regulatory compliance and SOC 2
-Type II security standards. Designed as a Turnkey Asset Management Platform (TAMP) for financial advisory practices.
+Type II security standards. Designed as a Turnkey Asset Management Platform (TAMP) for financial
+advisory practices.
 
 ## 🚀 Overview
 
 This platform provides a complete solution for financial advisory practices, featuring:
 
-- **Portfolio Management** - Model portfolio creation, client assignment, monitoring, and rebalancing
+- **Portfolio Management** - Model portfolio creation, client assignment, monitoring, and
+  rebalancing
 - **Client Relationship Management** - Comprehensive client data management with KYC/AML compliance
 - **Document Management** - SEC Rule 17a-4(f) compliant document storage with immutable audit trails
-- **Compliance Engine** - Automated compliance checking for SEC Marketing Rule 206(4)-1 and FINRA Rule
-  2210
+- **Compliance Engine** - Automated compliance checking for SEC Marketing Rule 206(4)-1 and FINRA
+  Rule 2210
 - **Marketing & Lead Management** - FINRA-compliant marketing workflows with approval chains
 - **Reporting & Analytics** - Regulatory reporting with complete audit trail generation
 
@@ -33,16 +35,16 @@ financial-advisor-mvp/
 
 ## 🛠️ Technology Stack
 
-| Layer            | Technology                    | Purpose                               |
-| ---------------- | ----------------------------- | ------------------------------------- |
-| **Frontend**     | Next.js 14, React 18          | Server-side rendering, enterprise UI  |
-| **Styling**      | Tailwind CSS                  | WCAG 2.1 AA accessible design         |
-| **Backend**      | NestJS, TypeScript            | Enterprise-grade API with validation  |
-| **Database**     | PostgreSQL                    | Row-level security, audit logging     |
-| **Caching**      | Redis                         | Session management, rate limiting     |
-| **Storage**      | MinIO/S3                      | Secure document storage               |
-| **CI/CD**        | GitHub Actions                | Automated testing and deployment      |
-| **Orchestration** | Turborepo                    | Monorepo task management              |
+| Layer             | Technology           | Purpose                              |
+| ----------------- | -------------------- | ------------------------------------ |
+| **Frontend**      | Next.js 14, React 18 | Server-side rendering, enterprise UI |
+| **Styling**       | Tailwind CSS         | WCAG 2.1 AA accessible design        |
+| **Backend**       | NestJS, TypeScript   | Enterprise-grade API with validation |
+| **Database**      | PostgreSQL           | Row-level security, audit logging    |
+| **Caching**       | Redis                | Session management, rate limiting    |
+| **Storage**       | MinIO/S3             | Secure document storage              |
+| **CI/CD**         | GitHub Actions       | Automated testing and deployment     |
+| **Orchestration** | Turborepo            | Monorepo task management             |
 
 ## 📋 Prerequisites
 
@@ -96,22 +98,26 @@ cd apps/web && npm run dev:mock
 ```
 
 **Mock Mode Features:**
+
 - No backend services required (PostgreSQL, Redis, MinIO, API)
 - Pre-populated mock data for all entities (clients, documents, compliance, marketing, reports)
 - Simulated API responses with realistic delays
 - Multiple data states available (loading, success, error, empty)
 
 **Mock Credentials for Login:**
+
 - Email: `john.doe@example.com`, Password: `Password123!`
 - MFA Code (when enabled): `123456`
 
 **When to use Mock Mode:**
+
 - UI/UX prototyping and design iteration
 - Component development and styling
 - Frontend testing without backend dependencies
 - Demo and presentation preparation
 
 **When to switch to Full-Stack Mode:**
+
 - Integration testing with real API
 - Testing data persistence and mutations
 - End-to-end feature validation
@@ -126,18 +132,18 @@ cd apps/web && npm run dev:mock
 
 ## 📜 Available Scripts
 
-| Command                                         | Description                                        |
-| ----------------------------------------------- | -------------------------------------------------- |
-| `npm run dev`                                   | Start all apps in development mode                 |
-| `npm run dev:mock --workspace=apps/web`         | Start frontend in mock mode (no backend required)  |
-| `npm run build`                                 | Build all applications                             |
-| `npm run lint`                                  | Run ESLint across all packages                     |
-| `npm run test`                                  | Run tests across all packages                      |
-| `npm run test:coverage`                         | Run tests with coverage reports                    |
-| `npm run typecheck`                             | Run TypeScript type checking                       |
-| `npm run format`                                | Format code with Prettier                          |
-| `npm run security:audit`                        | Run security audit on dependencies                 |
-| `npm run compliance:check`                      | Run compliance validation                          |
+| Command                                 | Description                                       |
+| --------------------------------------- | ------------------------------------------------- |
+| `npm run dev`                           | Start all apps in development mode                |
+| `npm run dev:mock --workspace=apps/web` | Start frontend in mock mode (no backend required) |
+| `npm run build`                         | Build all applications                            |
+| `npm run lint`                          | Run ESLint across all packages                    |
+| `npm run test`                          | Run tests across all packages                     |
+| `npm run test:coverage`                 | Run tests with coverage reports                   |
+| `npm run typecheck`                     | Run TypeScript type checking                      |
+| `npm run format`                        | Format code with Prettier                         |
+| `npm run security:audit`                | Run security audit on dependencies                |
+| `npm run compliance:check`              | Run compliance validation                         |
 
 ## 🔒 Security Features
 
@@ -160,13 +166,13 @@ cd apps/web && npm run dev:mock
 
 ### Retention Policies
 
-| Record Type          | Retention Period |
-| -------------------- | ---------------- |
-| Communications       | 3 years          |
-| Contracts            | 6 years          |
-| Financial Records    | 7 years          |
-| Marketing Materials  | 6 years          |
-| Audit Logs           | 7 years          |
+| Record Type         | Retention Period |
+| ------------------- | ---------------- |
+| Communications      | 3 years          |
+| Contracts           | 6 years          |
+| Financial Records   | 7 years          |
+| Marketing Materials | 6 years          |
+| Audit Logs          | 7 years          |
 
 ## 🧪 Testing
 
@@ -221,4 +227,3 @@ This project is proprietary software. All rights reserved.
 ---
 
 **Built with ❤️ for financial advisors who value compliance and security.**
-

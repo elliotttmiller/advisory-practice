@@ -106,9 +106,7 @@ export class DocumentsService {
     document.updatedAt = new Date();
 
     // Log document approval for FINRA compliance
-    console.log(
-      `[AUDIT] Document approved: ${id} by ${approvedBy} at ${new Date().toISOString()}`
-    );
+    console.log(`[AUDIT] Document approved: ${id} by ${approvedBy} at ${new Date().toISOString()}`);
 
     return document;
   }

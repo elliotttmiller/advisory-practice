@@ -3,7 +3,7 @@
 import type { ApiResponse, PaginationMeta } from '@financial-advisor/shared';
 
 // Asset class types
-export type AssetClass = 
+export type AssetClass =
   | 'domestic_equity'
   | 'international_equity'
   | 'fixed_income'
@@ -31,7 +31,12 @@ export interface ModelPortfolio {
   id: string;
   name: string;
   description: string;
-  riskLevel: 'conservative' | 'moderate_conservative' | 'moderate' | 'moderate_aggressive' | 'aggressive';
+  riskLevel:
+    | 'conservative'
+    | 'moderate_conservative'
+    | 'moderate'
+    | 'moderate_aggressive'
+    | 'aggressive';
   investmentObjectives: string[];
   benchmark: string;
   holdings: SecurityHolding[];
@@ -133,12 +138,42 @@ export const mockModelPortfolios: ModelPortfolio[] = [
     investmentObjectives: ['capital_preservation', 'income'],
     benchmark: 'Bloomberg US Aggregate Bond Index',
     holdings: [
-      { symbol: 'BND', name: 'Vanguard Total Bond Market ETF', assetClass: 'fixed_income', targetWeight: 40 },
-      { symbol: 'VCSH', name: 'Vanguard Short-Term Corporate Bond ETF', assetClass: 'fixed_income', targetWeight: 20 },
-      { symbol: 'VYM', name: 'Vanguard High Dividend Yield ETF', assetClass: 'domestic_equity', targetWeight: 15 },
-      { symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'international_equity', targetWeight: 10 },
-      { symbol: 'VNQ', name: 'Vanguard Real Estate ETF', assetClass: 'real_estate', targetWeight: 5 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 10 },
+      {
+        symbol: 'BND',
+        name: 'Vanguard Total Bond Market ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 40,
+      },
+      {
+        symbol: 'VCSH',
+        name: 'Vanguard Short-Term Corporate Bond ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 20,
+      },
+      {
+        symbol: 'VYM',
+        name: 'Vanguard High Dividend Yield ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 15,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International Stock ETF',
+        assetClass: 'international_equity',
+        targetWeight: 10,
+      },
+      {
+        symbol: 'VNQ',
+        name: 'Vanguard Real Estate ETF',
+        assetClass: 'real_estate',
+        targetWeight: 5,
+      },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 10,
+      },
     ],
     totalAUM: 85000000,
     clientCount: 145,
@@ -163,17 +198,43 @@ export const mockModelPortfolios: ModelPortfolio[] = [
   {
     id: 'model-002',
     name: 'Balanced Growth',
-    description: 'Balanced approach combining growth potential with stability through diversified allocation.',
+    description:
+      'Balanced approach combining growth potential with stability through diversified allocation.',
     riskLevel: 'moderate',
     investmentObjectives: ['growth', 'income'],
     benchmark: '60/40 S&P 500/Bloomberg Aggregate',
     holdings: [
-      { symbol: 'VTI', name: 'Vanguard Total Stock Market ETF', assetClass: 'domestic_equity', targetWeight: 35 },
-      { symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'international_equity', targetWeight: 15 },
-      { symbol: 'BND', name: 'Vanguard Total Bond Market ETF', assetClass: 'fixed_income', targetWeight: 30 },
-      { symbol: 'VNQ', name: 'Vanguard Real Estate ETF', assetClass: 'real_estate', targetWeight: 10 },
+      {
+        symbol: 'VTI',
+        name: 'Vanguard Total Stock Market ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 35,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International Stock ETF',
+        assetClass: 'international_equity',
+        targetWeight: 15,
+      },
+      {
+        symbol: 'BND',
+        name: 'Vanguard Total Bond Market ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 30,
+      },
+      {
+        symbol: 'VNQ',
+        name: 'Vanguard Real Estate ETF',
+        assetClass: 'real_estate',
+        targetWeight: 10,
+      },
       { symbol: 'IAU', name: 'iShares Gold Trust', assetClass: 'commodities', targetWeight: 5 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 5 },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 5,
+      },
     ],
     totalAUM: 210000000,
     clientCount: 380,
@@ -198,17 +259,48 @@ export const mockModelPortfolios: ModelPortfolio[] = [
   {
     id: 'model-003',
     name: 'Growth Focused',
-    description: 'Aggressive growth strategy with higher equity allocation for long-term wealth accumulation.',
+    description:
+      'Aggressive growth strategy with higher equity allocation for long-term wealth accumulation.',
     riskLevel: 'aggressive',
     investmentObjectives: ['growth', 'speculation'],
     benchmark: 'S&P 500 Index',
     holdings: [
-      { symbol: 'VTI', name: 'Vanguard Total Stock Market ETF', assetClass: 'domestic_equity', targetWeight: 45 },
-      { symbol: 'VGT', name: 'Vanguard Information Technology ETF', assetClass: 'domestic_equity', targetWeight: 15 },
-      { symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'international_equity', targetWeight: 20 },
-      { symbol: 'VWO', name: 'Vanguard Emerging Markets ETF', assetClass: 'international_equity', targetWeight: 10 },
-      { symbol: 'BND', name: 'Vanguard Total Bond Market ETF', assetClass: 'fixed_income', targetWeight: 7 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 3 },
+      {
+        symbol: 'VTI',
+        name: 'Vanguard Total Stock Market ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 45,
+      },
+      {
+        symbol: 'VGT',
+        name: 'Vanguard Information Technology ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 15,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International Stock ETF',
+        assetClass: 'international_equity',
+        targetWeight: 20,
+      },
+      {
+        symbol: 'VWO',
+        name: 'Vanguard Emerging Markets ETF',
+        assetClass: 'international_equity',
+        targetWeight: 10,
+      },
+      {
+        symbol: 'BND',
+        name: 'Vanguard Total Bond Market ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 7,
+      },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 3,
+      },
     ],
     totalAUM: 175000000,
     clientCount: 225,
@@ -233,16 +325,42 @@ export const mockModelPortfolios: ModelPortfolio[] = [
   {
     id: 'model-004',
     name: 'Tax-Efficient Growth',
-    description: 'Growth-oriented portfolio optimized for tax efficiency with municipal bonds and low-turnover funds.',
+    description:
+      'Growth-oriented portfolio optimized for tax efficiency with municipal bonds and low-turnover funds.',
     riskLevel: 'moderate_aggressive',
     investmentObjectives: ['growth', 'tax_efficiency'],
     benchmark: 'S&P 500 Index',
     holdings: [
-      { symbol: 'VTI', name: 'Vanguard Total Stock Market ETF', assetClass: 'domestic_equity', targetWeight: 40 },
-      { symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'international_equity', targetWeight: 20 },
-      { symbol: 'VTEB', name: 'Vanguard Tax-Exempt Bond ETF', assetClass: 'fixed_income', targetWeight: 25 },
-      { symbol: 'VNQ', name: 'Vanguard Real Estate ETF', assetClass: 'real_estate', targetWeight: 10 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 5 },
+      {
+        symbol: 'VTI',
+        name: 'Vanguard Total Stock Market ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 40,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International Stock ETF',
+        assetClass: 'international_equity',
+        targetWeight: 20,
+      },
+      {
+        symbol: 'VTEB',
+        name: 'Vanguard Tax-Exempt Bond ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 25,
+      },
+      {
+        symbol: 'VNQ',
+        name: 'Vanguard Real Estate ETF',
+        assetClass: 'real_estate',
+        targetWeight: 10,
+      },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 5,
+      },
     ],
     totalAUM: 95000000,
     clientCount: 120,
@@ -257,7 +375,7 @@ export const mockModelPortfolios: ModelPortfolio[] = [
       inceptionDate: new Date('2019-01-10'),
     },
     fees: {
-      managementFee: 0.40,
+      managementFee: 0.4,
       expenseRatio: 0.05,
     },
     status: 'active',
@@ -267,16 +385,42 @@ export const mockModelPortfolios: ModelPortfolio[] = [
   {
     id: 'model-005',
     name: 'ESG Sustainable',
-    description: 'Socially responsible investing focused on environmental, social, and governance factors.',
+    description:
+      'Socially responsible investing focused on environmental, social, and governance factors.',
     riskLevel: 'moderate',
     investmentObjectives: ['growth', 'income'],
     benchmark: 'MSCI USA ESG Leaders Index',
     holdings: [
-      { symbol: 'ESGU', name: 'iShares ESG Aware MSCI USA ETF', assetClass: 'domestic_equity', targetWeight: 35 },
-      { symbol: 'ESGD', name: 'iShares ESG Aware MSCI EAFE ETF', assetClass: 'international_equity', targetWeight: 20 },
-      { symbol: 'EAGG', name: 'iShares ESG Aware U.S. Aggregate Bond ETF', assetClass: 'fixed_income', targetWeight: 30 },
-      { symbol: 'ICLN', name: 'iShares Global Clean Energy ETF', assetClass: 'alternatives', targetWeight: 10 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 5 },
+      {
+        symbol: 'ESGU',
+        name: 'iShares ESG Aware MSCI USA ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 35,
+      },
+      {
+        symbol: 'ESGD',
+        name: 'iShares ESG Aware MSCI EAFE ETF',
+        assetClass: 'international_equity',
+        targetWeight: 20,
+      },
+      {
+        symbol: 'EAGG',
+        name: 'iShares ESG Aware U.S. Aggregate Bond ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 30,
+      },
+      {
+        symbol: 'ICLN',
+        name: 'iShares Global Clean Energy ETF',
+        assetClass: 'alternatives',
+        targetWeight: 10,
+      },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 5,
+      },
     ],
     totalAUM: 65000000,
     clientCount: 95,
@@ -291,7 +435,7 @@ export const mockModelPortfolios: ModelPortfolio[] = [
       inceptionDate: new Date('2020-06-15'),
     },
     fees: {
-      managementFee: 0.40,
+      managementFee: 0.4,
       expenseRatio: 0.12,
     },
     status: 'active',
@@ -312,14 +456,80 @@ export const mockClientPortfolios: ClientPortfolio[] = [
     custodian: 'Charles Schwab',
     accountType: 'individual',
     holdings: [
-      { symbol: 'VTI', name: 'Vanguard Total Stock Market ETF', assetClass: 'domestic_equity', targetWeight: 35, currentWeight: 36.2, shares: 450, price: 268.50, value: 120825, change: 2.15, changePercent: 0.81 },
-      { symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'international_equity', targetWeight: 15, currentWeight: 14.5, shares: 520, price: 58.75, value: 30550, change: -0.45, changePercent: -0.76 },
-      { symbol: 'BND', name: 'Vanguard Total Bond Market ETF', assetClass: 'fixed_income', targetWeight: 30, currentWeight: 29.8, shares: 420, price: 71.25, value: 29925, change: 0.12, changePercent: 0.17 },
-      { symbol: 'VNQ', name: 'Vanguard Real Estate ETF', assetClass: 'real_estate', targetWeight: 10, currentWeight: 10.2, shares: 125, price: 86.50, value: 10812.50, change: 0.85, changePercent: 0.99 },
-      { symbol: 'IAU', name: 'iShares Gold Trust', assetClass: 'commodities', targetWeight: 5, currentWeight: 4.8, shares: 280, price: 45.20, value: 12656, change: 0.35, changePercent: 0.78 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 5, currentWeight: 4.5, shares: 4500, price: 1.00, value: 4500, change: 0, changePercent: 0 },
+      {
+        symbol: 'VTI',
+        name: 'Vanguard Total Stock Market ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 35,
+        currentWeight: 36.2,
+        shares: 450,
+        price: 268.5,
+        value: 120825,
+        change: 2.15,
+        changePercent: 0.81,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International Stock ETF',
+        assetClass: 'international_equity',
+        targetWeight: 15,
+        currentWeight: 14.5,
+        shares: 520,
+        price: 58.75,
+        value: 30550,
+        change: -0.45,
+        changePercent: -0.76,
+      },
+      {
+        symbol: 'BND',
+        name: 'Vanguard Total Bond Market ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 30,
+        currentWeight: 29.8,
+        shares: 420,
+        price: 71.25,
+        value: 29925,
+        change: 0.12,
+        changePercent: 0.17,
+      },
+      {
+        symbol: 'VNQ',
+        name: 'Vanguard Real Estate ETF',
+        assetClass: 'real_estate',
+        targetWeight: 10,
+        currentWeight: 10.2,
+        shares: 125,
+        price: 86.5,
+        value: 10812.5,
+        change: 0.85,
+        changePercent: 0.99,
+      },
+      {
+        symbol: 'IAU',
+        name: 'iShares Gold Trust',
+        assetClass: 'commodities',
+        targetWeight: 5,
+        currentWeight: 4.8,
+        shares: 280,
+        price: 45.2,
+        value: 12656,
+        change: 0.35,
+        changePercent: 0.78,
+      },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 5,
+        currentWeight: 4.5,
+        shares: 4500,
+        price: 1.0,
+        value: 4500,
+        change: 0,
+        changePercent: 0,
+      },
     ],
-    totalValue: 209268.50,
+    totalValue: 209268.5,
     cashBalance: 4500,
     drift: 1.8,
     driftStatus: 'within_tolerance',
@@ -347,14 +557,80 @@ export const mockClientPortfolios: ClientPortfolio[] = [
     custodian: 'Fidelity',
     accountType: 'joint',
     holdings: [
-      { symbol: 'VTI', name: 'Vanguard Total Stock Market ETF', assetClass: 'domestic_equity', targetWeight: 45, currentWeight: 47.5, shares: 1250, price: 268.50, value: 335625, change: 2.15, changePercent: 0.81 },
-      { symbol: 'VGT', name: 'Vanguard Information Technology ETF', assetClass: 'domestic_equity', targetWeight: 15, currentWeight: 16.2, shares: 200, price: 525.00, value: 105000, change: 4.50, changePercent: 0.86 },
-      { symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'international_equity', targetWeight: 20, currentWeight: 18.8, shares: 850, price: 58.75, value: 49937.50, change: -0.45, changePercent: -0.76 },
-      { symbol: 'VWO', name: 'Vanguard Emerging Markets ETF', assetClass: 'international_equity', targetWeight: 10, currentWeight: 9.5, shares: 620, price: 45.80, value: 28396, change: 0.65, changePercent: 1.44 },
-      { symbol: 'BND', name: 'Vanguard Total Bond Market ETF', assetClass: 'fixed_income', targetWeight: 7, currentWeight: 5.8, shares: 220, price: 71.25, value: 15675, change: 0.12, changePercent: 0.17 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 3, currentWeight: 2.2, shares: 5850, price: 1.00, value: 5850, change: 0, changePercent: 0 },
+      {
+        symbol: 'VTI',
+        name: 'Vanguard Total Stock Market ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 45,
+        currentWeight: 47.5,
+        shares: 1250,
+        price: 268.5,
+        value: 335625,
+        change: 2.15,
+        changePercent: 0.81,
+      },
+      {
+        symbol: 'VGT',
+        name: 'Vanguard Information Technology ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 15,
+        currentWeight: 16.2,
+        shares: 200,
+        price: 525.0,
+        value: 105000,
+        change: 4.5,
+        changePercent: 0.86,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International Stock ETF',
+        assetClass: 'international_equity',
+        targetWeight: 20,
+        currentWeight: 18.8,
+        shares: 850,
+        price: 58.75,
+        value: 49937.5,
+        change: -0.45,
+        changePercent: -0.76,
+      },
+      {
+        symbol: 'VWO',
+        name: 'Vanguard Emerging Markets ETF',
+        assetClass: 'international_equity',
+        targetWeight: 10,
+        currentWeight: 9.5,
+        shares: 620,
+        price: 45.8,
+        value: 28396,
+        change: 0.65,
+        changePercent: 1.44,
+      },
+      {
+        symbol: 'BND',
+        name: 'Vanguard Total Bond Market ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 7,
+        currentWeight: 5.8,
+        shares: 220,
+        price: 71.25,
+        value: 15675,
+        change: 0.12,
+        changePercent: 0.17,
+      },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 3,
+        currentWeight: 2.2,
+        shares: 5850,
+        price: 1.0,
+        value: 5850,
+        change: 0,
+        changePercent: 0,
+      },
     ],
-    totalValue: 540483.50,
+    totalValue: 540483.5,
     cashBalance: 5850,
     drift: 3.2,
     driftStatus: 'approaching_threshold',
@@ -382,14 +658,80 @@ export const mockClientPortfolios: ClientPortfolio[] = [
     custodian: 'Charles Schwab',
     accountType: 'ira',
     holdings: [
-      { symbol: 'BND', name: 'Vanguard Total Bond Market ETF', assetClass: 'fixed_income', targetWeight: 40, currentWeight: 38.5, shares: 680, price: 71.25, value: 48450, change: 0.12, changePercent: 0.17 },
-      { symbol: 'VCSH', name: 'Vanguard Short-Term Corporate Bond ETF', assetClass: 'fixed_income', targetWeight: 20, currentWeight: 19.2, shares: 310, price: 78.50, value: 24335, change: 0.08, changePercent: 0.10 },
-      { symbol: 'VYM', name: 'Vanguard High Dividend Yield ETF', assetClass: 'domestic_equity', targetWeight: 15, currentWeight: 16.8, shares: 185, price: 115.20, value: 21312, change: 0.95, changePercent: 0.83 },
-      { symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'international_equity', targetWeight: 10, currentWeight: 11.5, shares: 250, price: 58.75, value: 14687.50, change: -0.45, changePercent: -0.76 },
-      { symbol: 'VNQ', name: 'Vanguard Real Estate ETF', assetClass: 'real_estate', targetWeight: 5, currentWeight: 4.2, shares: 62, price: 86.50, value: 5363, change: 0.85, changePercent: 0.99 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 10, currentWeight: 9.8, shares: 12500, price: 1.00, value: 12500, change: 0, changePercent: 0 },
+      {
+        symbol: 'BND',
+        name: 'Vanguard Total Bond Market ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 40,
+        currentWeight: 38.5,
+        shares: 680,
+        price: 71.25,
+        value: 48450,
+        change: 0.12,
+        changePercent: 0.17,
+      },
+      {
+        symbol: 'VCSH',
+        name: 'Vanguard Short-Term Corporate Bond ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 20,
+        currentWeight: 19.2,
+        shares: 310,
+        price: 78.5,
+        value: 24335,
+        change: 0.08,
+        changePercent: 0.1,
+      },
+      {
+        symbol: 'VYM',
+        name: 'Vanguard High Dividend Yield ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 15,
+        currentWeight: 16.8,
+        shares: 185,
+        price: 115.2,
+        value: 21312,
+        change: 0.95,
+        changePercent: 0.83,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International Stock ETF',
+        assetClass: 'international_equity',
+        targetWeight: 10,
+        currentWeight: 11.5,
+        shares: 250,
+        price: 58.75,
+        value: 14687.5,
+        change: -0.45,
+        changePercent: -0.76,
+      },
+      {
+        symbol: 'VNQ',
+        name: 'Vanguard Real Estate ETF',
+        assetClass: 'real_estate',
+        targetWeight: 5,
+        currentWeight: 4.2,
+        shares: 62,
+        price: 86.5,
+        value: 5363,
+        change: 0.85,
+        changePercent: 0.99,
+      },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 10,
+        currentWeight: 9.8,
+        shares: 12500,
+        price: 1.0,
+        value: 12500,
+        change: 0,
+        changePercent: 0,
+      },
     ],
-    totalValue: 126647.50,
+    totalValue: 126647.5,
     cashBalance: 12500,
     drift: 2.5,
     driftStatus: 'within_tolerance',
@@ -417,11 +759,66 @@ export const mockClientPortfolios: ClientPortfolio[] = [
     custodian: 'TD Ameritrade',
     accountType: 'trust',
     holdings: [
-      { symbol: 'VTI', name: 'Vanguard Total Stock Market ETF', assetClass: 'domestic_equity', targetWeight: 40, currentWeight: 43.5, shares: 980, price: 268.50, value: 263130, change: 2.15, changePercent: 0.81 },
-      { symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'international_equity', targetWeight: 20, currentWeight: 18.2, shares: 620, price: 58.75, value: 36425, change: -0.45, changePercent: -0.76 },
-      { symbol: 'VTEB', name: 'Vanguard Tax-Exempt Bond ETF', assetClass: 'fixed_income', targetWeight: 25, currentWeight: 23.5, shares: 285, price: 50.25, value: 14321.25, change: 0.15, changePercent: 0.30 },
-      { symbol: 'VNQ', name: 'Vanguard Real Estate ETF', assetClass: 'real_estate', targetWeight: 10, currentWeight: 9.8, shares: 70, price: 86.50, value: 6055, change: 0.85, changePercent: 0.99 },
-      { symbol: 'VMFXX', name: 'Vanguard Federal Money Market Fund', assetClass: 'cash', targetWeight: 5, currentWeight: 5.0, shares: 3050, price: 1.00, value: 3050, change: 0, changePercent: 0 },
+      {
+        symbol: 'VTI',
+        name: 'Vanguard Total Stock Market ETF',
+        assetClass: 'domestic_equity',
+        targetWeight: 40,
+        currentWeight: 43.5,
+        shares: 980,
+        price: 268.5,
+        value: 263130,
+        change: 2.15,
+        changePercent: 0.81,
+      },
+      {
+        symbol: 'VXUS',
+        name: 'Vanguard Total International Stock ETF',
+        assetClass: 'international_equity',
+        targetWeight: 20,
+        currentWeight: 18.2,
+        shares: 620,
+        price: 58.75,
+        value: 36425,
+        change: -0.45,
+        changePercent: -0.76,
+      },
+      {
+        symbol: 'VTEB',
+        name: 'Vanguard Tax-Exempt Bond ETF',
+        assetClass: 'fixed_income',
+        targetWeight: 25,
+        currentWeight: 23.5,
+        shares: 285,
+        price: 50.25,
+        value: 14321.25,
+        change: 0.15,
+        changePercent: 0.3,
+      },
+      {
+        symbol: 'VNQ',
+        name: 'Vanguard Real Estate ETF',
+        assetClass: 'real_estate',
+        targetWeight: 10,
+        currentWeight: 9.8,
+        shares: 70,
+        price: 86.5,
+        value: 6055,
+        change: 0.85,
+        changePercent: 0.99,
+      },
+      {
+        symbol: 'VMFXX',
+        name: 'Vanguard Federal Money Market Fund',
+        assetClass: 'cash',
+        targetWeight: 5,
+        currentWeight: 5.0,
+        shares: 3050,
+        price: 1.0,
+        value: 3050,
+        change: 0,
+        changePercent: 0,
+      },
     ],
     totalValue: 322981.25,
     cashBalance: 3050,
@@ -454,8 +851,8 @@ export const mockRebalancingTransactions: RebalancingTransaction[] = [
     securityName: 'Vanguard Total Stock Market ETF',
     action: 'sell',
     shares: 35,
-    estimatedPrice: 268.50,
-    estimatedValue: 9397.50,
+    estimatedPrice: 268.5,
+    estimatedValue: 9397.5,
     currentWeight: 43.5,
     targetWeight: 40,
     status: 'pending',
@@ -471,7 +868,7 @@ export const mockRebalancingTransactions: RebalancingTransaction[] = [
     action: 'buy',
     shares: 58,
     estimatedPrice: 58.75,
-    estimatedValue: 3407.50,
+    estimatedValue: 3407.5,
     currentWeight: 18.2,
     targetWeight: 20,
     status: 'pending',
@@ -503,7 +900,7 @@ export const mockRebalancingBatches: RebalancingBatch[] = [
     description: 'Regular quarterly rebalancing for accounts exceeding drift thresholds',
     transactions: mockRebalancingTransactions,
     totalBuys: 8181.25,
-    totalSells: 9397.50,
+    totalSells: 9397.5,
     netCashFlow: 1216.25,
     accountsAffected: 1,
     status: 'pending_approval',
@@ -552,7 +949,7 @@ export function getMockModelPortfoliosResponse(
   riskLevel?: ModelPortfolio['riskLevel']
 ): ApiResponse<ModelPortfolio[]> {
   let filtered = [...mockModelPortfolios];
-  
+
   if (riskLevel) {
     filtered = filtered.filter((m) => m.riskLevel === riskLevel);
   }
@@ -585,7 +982,7 @@ export function getMockModelPortfoliosResponse(
 
 export function getMockModelPortfolioById(id: string): ApiResponse<ModelPortfolio> {
   const model = mockModelPortfolios.find((m) => m.id === id);
-  
+
   if (!model) {
     return {
       success: false,
@@ -617,11 +1014,11 @@ export function getMockClientPortfoliosResponse(
   driftStatus?: ClientPortfolio['driftStatus']
 ): ApiResponse<ClientPortfolio[]> {
   let filtered = [...mockClientPortfolios];
-  
+
   if (clientId) {
     filtered = filtered.filter((p) => p.clientId === clientId);
   }
-  
+
   if (driftStatus) {
     filtered = filtered.filter((p) => p.driftStatus === driftStatus);
   }
@@ -654,7 +1051,7 @@ export function getMockClientPortfoliosResponse(
 
 export function getMockClientPortfolioById(id: string): ApiResponse<ClientPortfolio> {
   const portfolio = mockClientPortfolios.find((p) => p.id === id);
-  
+
   if (!portfolio) {
     return {
       success: false,

@@ -3,7 +3,7 @@ import { IsEmail, IsString, MinLength, MaxLength, IsOptional, Matches } from 'cl
 
 /**
  * Login DTO - validates user login credentials
- * 
+ *
  * Implements FIPS 140-2 compliant password requirements:
  * - Minimum 12 characters
  * - At least one uppercase letter
@@ -54,7 +54,7 @@ export class RefreshTokenDto {
 
 /**
  * Register DTO - validates new user registration
- * 
+ *
  * Implements FIPS 140-2 compliant password requirements
  */
 export class RegisterDto {
@@ -66,7 +66,8 @@ export class RegisterDto {
   email!: string;
 
   @ApiProperty({
-    description: 'User password (min 12 chars, must include uppercase, lowercase, number, and special character)',
+    description:
+      'User password (min 12 chars, must include uppercase, lowercase, number, and special character)',
     example: 'SecureP@ssw0rd!',
     minLength: 12,
     maxLength: 128,

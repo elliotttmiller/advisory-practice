@@ -36,7 +36,7 @@ export enum InvestmentObjective {
 
 /**
  * Create Client DTO - validates new client creation
- * 
+ *
  * Implements KYC/AML requirements for client onboarding
  */
 export class CreateClientDto {
@@ -116,7 +116,7 @@ export class CreateClientDto {
 
 /**
  * Update Client DTO - validates partial client updates
- * 
+ *
  * All fields are optional for PATCH requests
  */
 export class UpdateClientDto {

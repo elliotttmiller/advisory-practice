@@ -123,11 +123,7 @@ export type ComplianceRuleType =
   | 'SEC_REG_S_P'
   | 'AML_KYC';
 
-export type ComplianceCheckStatus =
-  | 'pending'
-  | 'approved'
-  | 'rejected'
-  | 'escalated';
+export type ComplianceCheckStatus = 'pending' | 'approved' | 'rejected' | 'escalated';
 
 export interface ApiResponse<T> {
   success: boolean;

@@ -112,15 +112,23 @@ export class ComplianceService {
 
       // Check for performance claims
       if (content.match(/\d+%\s*(return|gain|profit|yield)/i)) {
-        findings.push('Performance claim detected - requires supporting documentation and disclosures');
-        recommendations.push('Add required disclosure: "Past performance is not indicative of future results"');
+        findings.push(
+          'Performance claim detected - requires supporting documentation and disclosures'
+        );
+        recommendations.push(
+          'Add required disclosure: "Past performance is not indicative of future results"'
+        );
         if (severity === 'low') {
           severity = 'medium';
         }
       }
 
       // Check for testimonials without disclosure
-      if (lowerContent.includes('testimonial') || lowerContent.includes('review') || lowerContent.includes('client said')) {
+      if (
+        lowerContent.includes('testimonial') ||
+        lowerContent.includes('review') ||
+        lowerContent.includes('client said')
+      ) {
         if (!lowerContent.includes('compensated') && !lowerContent.includes('paid')) {
           findings.push('Testimonial detected - requires compensation disclosure if applicable');
           recommendations.push('Add disclosure if testimonial provider was compensated');
@@ -131,9 +139,15 @@ export class ComplianceService {
       }
 
       // Check for hypothetical performance
-      if (lowerContent.includes('hypothetical') || lowerContent.includes('backtested') || lowerContent.includes('simulated')) {
+      if (
+        lowerContent.includes('hypothetical') ||
+        lowerContent.includes('backtested') ||
+        lowerContent.includes('simulated')
+      ) {
         if (!lowerContent.includes('disclaimer') && !lowerContent.includes('limitations')) {
-          findings.push('Hypothetical performance detected without required limitations disclaimer');
+          findings.push(
+            'Hypothetical performance detected without required limitations disclaimer'
+          );
           recommendations.push('Add hypothetical performance limitations disclosure');
           if (severity === 'low') {
             severity = 'medium';
@@ -143,7 +157,9 @@ export class ComplianceService {
 
       // Check for third-party ratings
       if (content.match(/rated|ranking|star|rating/i)) {
-        findings.push('Third-party rating reference detected - verify current rating and methodology disclosure');
+        findings.push(
+          'Third-party rating reference detected - verify current rating and methodology disclosure'
+        );
         recommendations.push('Include date of rating and criteria used');
       }
     }
@@ -168,8 +184,16 @@ export class ComplianceService {
       }
 
       // Check for balanced presentation
-      if (lowerContent.includes('benefit') || lowerContent.includes('advantage') || lowerContent.includes('opportunity')) {
-        if (!lowerContent.includes('risk') && !lowerContent.includes('loss') && !lowerContent.includes('volatility')) {
+      if (
+        lowerContent.includes('benefit') ||
+        lowerContent.includes('advantage') ||
+        lowerContent.includes('opportunity')
+      ) {
+        if (
+          !lowerContent.includes('risk') &&
+          !lowerContent.includes('loss') &&
+          !lowerContent.includes('volatility')
+        ) {
           findings.push('Content may lack balanced presentation of risks and benefits');
           recommendations.push('Consider adding discussion of material risks');
           if (severity === 'low') {
@@ -179,7 +203,11 @@ export class ComplianceService {
       }
 
       // Check for projections
-      if (lowerContent.includes('will') || lowerContent.includes('expect') || lowerContent.includes('project')) {
+      if (
+        lowerContent.includes('will') ||
+        lowerContent.includes('expect') ||
+        lowerContent.includes('project')
+      ) {
         if (content.match(/will\s+(earn|make|return|grow|increase)/i)) {
           findings.push('Forward-looking statement detected - may imply certainty');
           recommendations.push('Use language like "may" or "could" instead of definitive claims');
@@ -292,7 +320,9 @@ export class ComplianceService {
     check.escalatedAt = new Date();
     check.updatedAt = new Date();
 
-    console.log(`[AUDIT] Compliance escalation: ${id} to ${escalatedTo} at ${new Date().toISOString()}`);
+    console.log(
+      `[AUDIT] Compliance escalation: ${id} to ${escalatedTo} at ${new Date().toISOString()}`
+    );
 
     return check;
   }

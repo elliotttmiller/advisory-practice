@@ -52,7 +52,7 @@ describe('AuthService', () => {
 
     it('should return token payload for valid credentials with demo password', async () => {
       const result = await service.validateUser('test@example.com', 'demo123');
-      
+
       expect(result).not.toBeNull();
       expect(result?.email).toBe('test@example.com');
       expect(result?.roles).toEqual(['advisor']);
@@ -67,8 +67,9 @@ describe('AuthService', () => {
         return defaultValue ?? '';
       });
 
-      await expect(service.validateUser('test@example.com', 'demo123'))
-        .rejects.toThrow('Mock authentication cannot be used in production');
+      await expect(service.validateUser('test@example.com', 'demo123')).rejects.toThrow(
+        'Mock authentication cannot be used in production'
+      );
     });
   });
 
@@ -129,8 +130,7 @@ describe('AuthService', () => {
         throw new Error('Invalid token');
       });
 
-      await expect(service.refreshTokens('invalid-token'))
-        .rejects.toThrow(UnauthorizedException);
+      await expect(service.refreshTokens('invalid-token')).rejects.toThrow(UnauthorizedException);
     });
   });
 
@@ -157,18 +157,18 @@ describe('AuthService', () => {
     it('should return true for matching password and hash', async () => {
       const password = 'testPassword123!';
       const hash = await service.hashPassword(password);
-      
+
       const result = await service.verifyPassword(password, hash);
-      
+
       expect(result).toBe(true);
     });
 
     it('should return false for non-matching password', async () => {
       const password = 'testPassword123!';
       const hash = await service.hashPassword(password);
-      
+
       const result = await service.verifyPassword('wrongPassword', hash);
-      
+
       expect(result).toBe(false);
     });
   });

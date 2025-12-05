@@ -113,8 +113,18 @@ describe('ComplianceService', () => {
     });
 
     it('should return checks filtered by status', async () => {
-      await service.validateContent('SEC_MARKETING_206_4_1', 'document', 'id1', 'Guaranteed returns!');
-      await service.validateContent('SEC_MARKETING_206_4_1', 'document', 'id2', 'Safe compliant content. Past performance does not guarantee future results.');
+      await service.validateContent(
+        'SEC_MARKETING_206_4_1',
+        'document',
+        'id1',
+        'Guaranteed returns!'
+      );
+      await service.validateContent(
+        'SEC_MARKETING_206_4_1',
+        'document',
+        'id2',
+        'Safe compliant content. Past performance does not guarantee future results.'
+      );
 
       const pending = await service.findAllChecks('pending');
       const approved = await service.findAllChecks('approved');
@@ -138,7 +148,12 @@ describe('ComplianceService', () => {
         'Some content to review. Past performance does not guarantee future results.'
       );
 
-      const reviewed = await service.reviewCheck(check.id, 'approved', 'compliance-officer-123', 'Looks good');
+      const reviewed = await service.reviewCheck(
+        check.id,
+        'approved',
+        'compliance-officer-123',
+        'Looks good'
+      );
 
       expect(reviewed?.status).toBe('approved');
       expect(reviewed?.reviewedBy).toBe('compliance-officer-123');
@@ -154,7 +169,12 @@ describe('ComplianceService', () => {
         'Guaranteed returns!' // Non-compliant
       );
 
-      const reviewed = await service.reviewCheck(check.id, 'rejected', 'compliance-officer-123', 'Contains prohibited terms');
+      const reviewed = await service.reviewCheck(
+        check.id,
+        'rejected',
+        'compliance-officer-123',
+        'Contains prohibited terms'
+      );
 
       expect(reviewed?.status).toBe('rejected');
       expect(reviewed?.reviewedBy).toBe('compliance-officer-123');

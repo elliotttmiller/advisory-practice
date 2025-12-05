@@ -26,9 +26,7 @@ const PROHIBITED_TERMS = [
   'never lose money',
 ];
 
-const REQUIRED_AUDIT_PATTERNS = [
-  '[AUDIT]',
-];
+const REQUIRED_AUDIT_PATTERNS = ['[AUDIT]'];
 
 const REQUIRED_COMPLIANCE_FEATURES = {
   softDelete: /status.*=.*['"]inactive['"]/i,
@@ -41,11 +39,12 @@ let hasErrors = false;
 let warnings = [];
 
 function log(message, type = 'info') {
-  const prefix = {
-    info: '✓',
-    warn: '⚠',
-    error: '✗',
-  }[type] || '•';
+  const prefix =
+    {
+      info: '✓',
+      warn: '⚠',
+      error: '✗',
+    }[type] || '•';
 
   console.log(`${prefix} ${message}`);
 }
@@ -53,7 +52,8 @@ function log(message, type = 'info') {
 function checkProhibitedTerms(filePath, content) {
   const lowerContent = content.toLowerCase();
   // Skip files that contain validation/detection logic for prohibited terms
-  const isValidationFile = filePath.includes('validation.ts') ||
+  const isValidationFile =
+    filePath.includes('validation.ts') ||
     filePath.includes('constants.ts') ||
     filePath.includes('compliance.service.ts');
 
@@ -80,7 +80,11 @@ function checkAuditLogging(filePath, content) {
 
 function checkSoftDelete(content, filePath) {
   if (filePath.includes('service.ts') && content.includes('delete')) {
-    if (!content.includes('soft') && !content.includes('inactive') && !content.includes('archive')) {
+    if (
+      !content.includes('soft') &&
+      !content.includes('inactive') &&
+      !content.includes('archive')
+    ) {
       log(`Hard delete pattern found in ${filePath} - FINRA requires soft delete`, 'warn');
       warnings.push(`${filePath}: Consider using soft delete for regulatory compliance`);
     }
@@ -99,7 +103,6 @@ function validateFile(filePath) {
 
     // Check for soft delete patterns
     checkSoftDelete(content, filePath);
-
   } catch (err) {
     log(`Error reading file ${filePath}: ${err.message}`, 'error');
     hasErrors = true;
