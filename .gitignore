@@ -69,8 +69,8 @@ secrets/
 .secrets/
 
 # Compliance and audit artifacts (generated)
-compliance-reports/
-audit-logs/
+/compliance-reports/
+/audit-logs/
 
 # Database
 *.sqlite
